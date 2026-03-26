@@ -8,7 +8,7 @@ export interface LeaderboardPrize {
 }
 
 export interface Leaderboard {
-  id: string;
+  id: number;
   title: string;
   description: string;
   startDate: string;

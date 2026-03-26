@@ -7,8 +7,11 @@ export async function getLeaderboards(): Promise<Leaderboard[]> {
 }
 
 export async function createLeaderboard(
-  payload: Leaderboard,
+  payload: Omit<Leaderboard, 'id'>
 ): Promise<Leaderboard> {
-  const response = await apiClient.post<Leaderboard>("/leaderboards", payload);
+  const response = await apiClient.post<Leaderboard>(
+    '/leaderboards',
+    payload
+  );
   return response.data;
 }

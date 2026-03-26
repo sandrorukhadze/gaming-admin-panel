@@ -255,6 +255,7 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
       <CreateLeaderboardModal
         open={isCreateModalOpen}
         onClose={handleCloseCreateModal}
+        existingLeaderboards={data}
       />
     </>
   );

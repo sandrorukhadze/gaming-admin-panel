@@ -11,7 +11,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AppModal } from "@/shared/ui/AppModal";
-import { useCreateLeaderboard } from "../hooks/useCreateLeaderboard";
+
 import {
   createLeaderboardSchema,
   type CreateLeaderboardFormInput,
@@ -19,10 +19,13 @@ import {
 } from "../model/leaderboard.schema";
 import type { Leaderboard } from "../model/leaderboard.types";
 import { ConfirmModal } from "@/shared/ui/ConfirmModal";
+import { useCreateLeaderboard } from "../hooks/useCreateLeaderboard";
+import { getNextId } from "@/shared/lib/getNextId";
 
 interface CreateLeaderboardModalProps {
   open: boolean;
   onClose: () => void;
+  existingLeaderboards: Leaderboard[];
 }
 
 function getDefaultValues(): CreateLeaderboardFormInput {
@@ -40,6 +43,7 @@ function getDefaultValues(): CreateLeaderboardFormInput {
 export function CreateLeaderboardModal({
   open,
   onClose,
+  existingLeaderboards, // 👈 ესეც
 }: CreateLeaderboardModalProps) {
   const [toast, setToast] = useState({
     open: false,
@@ -81,8 +85,10 @@ export function CreateLeaderboardModal({
   async function onSubmit(values: CreateLeaderboardFormValues) {
     const now = new Date().toISOString();
 
+    const newId = getNextId(existingLeaderboards);
+
     const payload: Leaderboard = {
-      id: crypto.randomUUID(),
+      id: newId,
       title: values.title,
       description: values.description,
       startDate: new Date(values.startDate).toISOString(),
