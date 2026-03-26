@@ -1,4 +1,17 @@
-import { Chip, Stack, Typography } from '@mui/material';
+import { useMemo, useState } from 'react';
+import {
+  Chip,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  Typography,
+} from '@mui/material';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import type { Leaderboard } from '../model/leaderboard.types';
 import { DataTable, type Column } from '@/shared/ui/DataTable';
 
@@ -6,7 +19,12 @@ interface LeaderboardTableProps {
   data: Leaderboard[];
 }
 
-function getStatusColor(status: Leaderboard['status']): 'default' | 'success' | 'warning' {
+type StatusFilter = 'all' | Leaderboard['status'];
+type Order = 'asc' | 'desc';
+
+function getStatusColor(
+  status: Leaderboard['status']
+): 'default' | 'success' | 'warning' {
   if (status === 'active') {
     return 'success';
   }
@@ -33,10 +51,62 @@ function getScoringColor(
 }
 
 export function LeaderboardTable({ data }: LeaderboardTableProps) {
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
+  const [orderBy, setOrderBy] = useState<string>('title');
+  const [order, setOrder] = useState<Order>('asc');
+
+  function handleSort(key: string) {
+    const isAsc = orderBy === key && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(key);
+  }
+
+  const filteredData = useMemo(() => {
+    if (statusFilter === 'all') {
+      return data;
+    }
+
+    return data.filter((item) => item.status === statusFilter);
+  }, [data, statusFilter]);
+
+  const sortedData = useMemo(() => {
+    const sorted = [...filteredData];
+
+    sorted.sort((a, b) => {
+      let result = 0;
+
+      if (orderBy === 'title') {
+        result = a.title.localeCompare(b.title);
+      }
+
+      if (orderBy === 'scoringType') {
+        result = a.scoringType.localeCompare(b.scoringType);
+      }
+
+      if (orderBy === 'startDate') {
+        result =
+          new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
+      }
+
+      if (orderBy === 'endDate') {
+        result = new Date(a.endDate).getTime() - new Date(b.endDate).getTime();
+      }
+
+      if (orderBy === 'maxParticipants') {
+        result = a.maxParticipants - b.maxParticipants;
+      }
+
+      return order === 'asc' ? result : -result;
+    });
+
+    return sorted;
+  }, [filteredData, orderBy, order]);
+
   const columns: Column<Leaderboard>[] = [
     {
       key: 'title',
       title: 'Title',
+      sortable: true,
       render: (row) => (
         <Stack spacing={0.5}>
           <Typography fontWeight={600}>{row.title}</Typography>
@@ -54,58 +124,71 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
           label={row.status}
           color={getStatusColor(row.status)}
           size="small"
-          variant="filled"
-          sx={{ textTransform: 'capitalize', fontWeight: 600 }}
+          sx={{ textTransform: 'capitalize' }}
         />
       ),
     },
     {
       key: 'scoringType',
       title: 'Scoring',
+      sortable: true,
       render: (row) => (
         <Chip
           label={row.scoringType}
           color={getScoringColor(row.scoringType)}
           size="small"
           variant="outlined"
-          sx={{ textTransform: 'capitalize', fontWeight: 500 }}
+          sx={{ textTransform: 'capitalize' }}
         />
-      ),
-    },
-    {
-      key: 'prizes',
-      title: 'Prizes',
-      render: (row) => (
-        <Typography fontWeight={600} color="warning.main">
-          {row.prizes.length} prizes
-        </Typography>
       ),
     },
     {
       key: 'startDate',
       title: 'Start Date',
-      render: (row) => (
-        <Typography color="text.secondary">
-          {new Date(row.startDate).toLocaleDateString()}
-        </Typography>
-      ),
+      sortable: true,
+      render: (row) => new Date(row.startDate).toLocaleDateString(),
     },
     {
       key: 'endDate',
       title: 'End Date',
-      render: (row) => (
-        <Typography color="text.secondary">
-          {new Date(row.endDate).toLocaleDateString()}
-        </Typography>
-      ),
+      sortable: true,
+      render: (row) => new Date(row.endDate).toLocaleDateString(),
     },
     {
       key: 'maxParticipants',
       title: 'Participants',
+      sortable: true,
+      render: (row) => row.maxParticipants,
+    },
+    {
+      key: 'actions',
+      title: 'Actions',
       render: (row) => (
-        <Typography fontWeight={600} color="primary.main">
-          {row.maxParticipants}
-        </Typography>
+        <Stack direction="row" spacing={1}>
+          <IconButton
+            size="small"
+            color="primary"
+            aria-label={`View ${row.title}`}
+          >
+            <VisibilityOutlinedIcon fontSize="small" />
+          </IconButton>
+
+          <IconButton
+            size="small"
+            color="secondary"
+            aria-label={`Edit ${row.title}`}
+          >
+            <EditOutlinedIcon fontSize="small" />
+          </IconButton>
+
+          <IconButton
+            size="small"
+            color="error"
+            aria-label={`Delete ${row.title}`}
+          >
+            <DeleteOutlineOutlinedIcon fontSize="small" />
+          </IconButton>
+        </Stack>
       ),
     },
   ];
@@ -116,7 +199,31 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
         Leaderboards
       </Typography>
 
-      <DataTable data={data} columns={columns} />
+      <Stack direction="row" mb={2}>
+        <FormControl size="small" sx={{ minWidth: 180 }}>
+          <InputLabel>Status</InputLabel>
+          <Select
+            value={statusFilter}
+            label="Status"
+            onChange={(event) =>
+              setStatusFilter(event.target.value as StatusFilter)
+            }
+          >
+            <MenuItem value="all">All</MenuItem>
+            <MenuItem value="draft">Draft</MenuItem>
+            <MenuItem value="active">Active</MenuItem>
+            <MenuItem value="completed">Completed</MenuItem>
+          </Select>
+        </FormControl>
+      </Stack>
+
+      <DataTable
+        data={sortedData}
+        columns={columns}
+        order={order}
+        orderBy={orderBy}
+        onSort={handleSort}
+      />
     </>
   );
 }
