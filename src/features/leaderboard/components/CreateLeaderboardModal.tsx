@@ -43,7 +43,7 @@ function getDefaultValues(): CreateLeaderboardFormInput {
 export function CreateLeaderboardModal({
   open,
   onClose,
-  existingLeaderboards, // 👈 ესეც
+  existingLeaderboards, 
 }: CreateLeaderboardModalProps) {
   const [toast, setToast] = useState({
     open: false,

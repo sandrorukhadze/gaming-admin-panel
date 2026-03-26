@@ -15,3 +15,7 @@ export async function createLeaderboard(
   );
   return response.data;
 }
+
+export async function deleteLeaderboard(id: number) {
+  await apiClient.delete(`/leaderboards/${id}`);
+}

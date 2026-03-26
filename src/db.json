@@ -1,63 +1,6 @@
 {
   "leaderboards": [
     {
-      "id": "1",
-      "title": "Weekly Tournament",
-      "description": "Top players of the week",
-      "startDate": "2026-03-01T00:00:00.000Z",
-      "endDate": "2026-03-07T23:59:59.000Z",
-      "status": "active",
-      "scoringType": "points",
-      "prizes": [
-        {
-          "id": "p1",
-          "rank": 1,
-          "name": "Gold Prize",
-          "type": "coins",
-          "amount": 1000,
-          "imageUrl": ""
-        }
-      ],
-      "maxParticipants": 100,
-      "createdAt": "2026-03-01T00:00:00.000Z",
-      "updatedAt": "2026-03-01T00:00:00.000Z"
-    },
-    {
-      "id": "2",
-      "title": "Monthly Wins",
-      "description": "Most wins in a month",
-      "startDate": "2026-03-01T00:00:00.000Z",
-      "endDate": "2026-03-31T23:59:59.000Z",
-      "status": "draft",
-      "scoringType": "wins",
-      "prizes": [
-        {
-          "id": "p2",
-          "rank": 1,
-          "name": "Bonus Pack",
-          "type": "bonus",
-          "amount": 500,
-          "imageUrl": ""
-        }
-      ],
-      "maxParticipants": 50,
-      "createdAt": "2026-03-01T00:00:00.000Z",
-      "updatedAt": "2026-03-01T00:00:00.000Z"
-    },
-    {
-      "id": "3",
-      "title": "მაფია",
-      "description": "მაფია2",
-      "startDate": "2026-03-26T19:34:00.000Z",
-      "endDate": "2026-03-27T19:34:00.000Z",
-      "status": "active",
-      "scoringType": "points",
-      "prizes": [],
-      "maxParticipants": 2,
-      "createdAt": "2026-03-26T19:34:45.084Z",
-      "updatedAt": "2026-03-26T19:34:45.084Z"
-    },
-    {
       "id": "4",
       "title": "მაფია",
       "description": "მაფია2",
@@ -69,19 +12,6 @@
       "maxParticipants": 2,
       "createdAt": "2026-03-26T19:34:50.461Z",
       "updatedAt": "2026-03-26T19:34:50.461Z"
-    },
-    {
-      "id": "5",
-      "title": "1231",
-      "description": "321312",
-      "startDate": "2026-03-12T19:35:00.000Z",
-      "endDate": "2026-03-20T19:35:00.000Z",
-      "status": "draft",
-      "scoringType": "points",
-      "prizes": [],
-      "maxParticipants": 2,
-      "createdAt": "2026-03-26T19:35:09.613Z",
-      "updatedAt": "2026-03-26T19:35:09.613Z"
     },
     {
       "id": "6",

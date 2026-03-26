@@ -17,6 +17,8 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import type { Leaderboard } from "../model/leaderboard.types";
 import { DataTable, type Column } from "@/shared/ui/DataTable";
 import { CreateLeaderboardModal } from "./CreateLeaderboardModal";
+import { ConfirmModal } from "@/shared/ui/ConfirmModal";
+import { useDeleteLeaderboard } from "../hooks/useDeleteLeaderboard";
 
 interface LeaderboardTableProps {
   data: Leaderboard[];
@@ -58,6 +60,27 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
   const [orderBy, setOrderBy] = useState<string>("title");
   const [order, setOrder] = useState<Order>("asc");
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
+  const [deleteId, setDeleteId] = useState<number | null>(null);
+  const [deleteTitle, setDeleteTitle] = useState<string>("");
+
+  const { mutateAsync, isPending } = useDeleteLeaderboard();
+
+  function handleOpenDelete(row: Leaderboard) {
+    setDeleteId(row.id);
+    setDeleteTitle(row.title);
+  }
+
+  function handleCloseDelete() {
+    setDeleteId(null);
+    setDeleteTitle("");
+  }
+
+  async function handleConfirmDelete() {
+    if (!deleteId) return;
+
+    await mutateAsync(deleteId);
+    handleCloseDelete();
+  }
 
   function handleSort(key: string) {
     const isAsc = orderBy === key && order === "asc";
@@ -197,6 +220,7 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
             size="small"
             color="error"
             aria-label={`Delete ${row.title}`}
+            onClick={() => handleOpenDelete(row)}
           >
             <DeleteOutlineOutlinedIcon fontSize="small" />
           </IconButton>
@@ -256,6 +280,17 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
         open={isCreateModalOpen}
         onClose={handleCloseCreateModal}
         existingLeaderboards={data}
+      />
+
+      <ConfirmModal
+        open={deleteId !== null}
+        title="Delete leaderboard"
+        description={`Are you sure you want to delete "${deleteTitle}"?`}
+        confirmText="Delete"
+        cancelText="Cancel"
+        loading={isPending}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCloseDelete}
       />
     </>
   );
