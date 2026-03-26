@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from "react";
 import {
   Alert,
   Box,
@@ -7,17 +7,18 @@ import {
   Snackbar,
   Stack,
   TextField,
-} from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AppModal } from '@/shared/ui/AppModal';
-import { useCreateLeaderboard } from '../hooks/useCreateLeaderboard';
+} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AppModal } from "@/shared/ui/AppModal";
+import { useCreateLeaderboard } from "../hooks/useCreateLeaderboard";
 import {
   createLeaderboardSchema,
   type CreateLeaderboardFormInput,
   type CreateLeaderboardFormValues,
-} from '../model/leaderboard.schema';
-import type { Leaderboard } from '../model/leaderboard.types';
+} from "../model/leaderboard.schema";
+import type { Leaderboard } from "../model/leaderboard.types";
+import { ConfirmModal } from "@/shared/ui/ConfirmModal";
 
 interface CreateLeaderboardModalProps {
   open: boolean;
@@ -26,13 +27,13 @@ interface CreateLeaderboardModalProps {
 
 function getDefaultValues(): CreateLeaderboardFormInput {
   return {
-    title: '',
-    description: '',
-    startDate: '',
-    endDate: '',
-    status: 'draft',
-    scoringType: 'points',
-    maxParticipants: '' as unknown as number,
+    title: "",
+    description: "",
+    startDate: "",
+    endDate: "",
+    status: "draft",
+    scoringType: "points",
+    maxParticipants: "" as unknown as number,
   };
 }
 
@@ -42,8 +43,8 @@ export function CreateLeaderboardModal({
 }: CreateLeaderboardModalProps) {
   const [toast, setToast] = useState({
     open: false,
-    message: '',
-    severity: 'success' as 'success' | 'error',
+    message: "",
+    severity: "success" as "success" | "error",
   });
 
   const {
@@ -51,12 +52,15 @@ export function CreateLeaderboardModal({
     handleSubmit,
     reset,
     formState: { errors, isDirty, isSubmitting },
-  } = useForm<CreateLeaderboardFormInput, unknown, CreateLeaderboardFormValues>({
-    resolver: zodResolver(createLeaderboardSchema),
-    defaultValues: useMemo(() => getDefaultValues(), []),
-  });
+  } = useForm<CreateLeaderboardFormInput, unknown, CreateLeaderboardFormValues>(
+    {
+      resolver: zodResolver(createLeaderboardSchema),
+      defaultValues: useMemo(() => getDefaultValues(), []),
+    },
+  );
 
   const { mutateAsync, isPending } = useCreateLeaderboard();
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -66,10 +70,8 @@ export function CreateLeaderboardModal({
 
   function handleClose() {
     if (isDirty) {
-      const confirmClose = window.confirm('Unsaved changes will be lost');
-      if (!confirmClose) {
-        return;
-      }
+      setIsConfirmOpen(true);
+      return;
     }
 
     reset(getDefaultValues());
@@ -98,8 +100,8 @@ export function CreateLeaderboardModal({
 
       setToast({
         open: true,
-        message: 'Created successfully',
-        severity: 'success',
+        message: "Created successfully",
+        severity: "success",
       });
 
       reset(getDefaultValues());
@@ -107,10 +109,20 @@ export function CreateLeaderboardModal({
     } catch {
       setToast({
         open: true,
-        message: 'Error creating leaderboard',
-        severity: 'error',
+        message: "Error creating leaderboard",
+        severity: "error",
       });
     }
+  }
+
+  function handleConfirmClose() {
+    setIsConfirmOpen(false);
+    reset(getDefaultValues());
+    onClose();
+  }
+
+  function handleCancelClose() {
+    setIsConfirmOpen(false);
   }
 
   return (
@@ -120,7 +132,7 @@ export function CreateLeaderboardModal({
           <Stack spacing={2}>
             <TextField
               label="Title"
-              {...register('title')}
+              {...register("title")}
               error={!!errors.title}
               helperText={errors.title?.message}
             />
@@ -128,7 +140,7 @@ export function CreateLeaderboardModal({
             <TextField
               label="Description"
               multiline
-              {...register('description')}
+              {...register("description")}
               error={!!errors.description}
               helperText={errors.description?.message}
             />
@@ -137,7 +149,7 @@ export function CreateLeaderboardModal({
               label="Start Date"
               type="datetime-local"
               InputLabelProps={{ shrink: true }}
-              {...register('startDate')}
+              {...register("startDate")}
               error={!!errors.startDate}
               helperText={errors.startDate?.message}
             />
@@ -146,7 +158,7 @@ export function CreateLeaderboardModal({
               label="End Date"
               type="datetime-local"
               InputLabelProps={{ shrink: true }}
-              {...register('endDate')}
+              {...register("endDate")}
               error={!!errors.endDate}
               helperText={errors.endDate?.message}
             />
@@ -155,7 +167,7 @@ export function CreateLeaderboardModal({
               select
               label="Status"
               defaultValue="draft"
-              {...register('status')}
+              {...register("status")}
               error={!!errors.status}
               helperText={errors.status?.message}
             >
@@ -168,7 +180,7 @@ export function CreateLeaderboardModal({
               select
               label="Scoring Type"
               defaultValue="points"
-              {...register('scoringType')}
+              {...register("scoringType")}
               error={!!errors.scoringType}
               helperText={errors.scoringType?.message}
             >
@@ -180,7 +192,7 @@ export function CreateLeaderboardModal({
             <TextField
               label="Max Participants"
               type="number"
-              {...register('maxParticipants')}
+              {...register("maxParticipants")}
               error={!!errors.maxParticipants}
               helperText={errors.maxParticipants?.message}
             />
@@ -197,6 +209,16 @@ export function CreateLeaderboardModal({
           </Stack>
         </Box>
       </AppModal>
+
+      <ConfirmModal
+        open={isConfirmOpen}
+        title="Discard changes?"
+        description="You have unsaved changes. Are you sure you want to leave?"
+        confirmText="Discard"
+        cancelText="Stay"
+        onConfirm={handleConfirmClose}
+        onCancel={handleCancelClose}
+      />
 
       <Snackbar
         open={toast.open}

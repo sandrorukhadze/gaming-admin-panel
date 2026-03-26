@@ -22,7 +22,7 @@ export function AppModal({
   children,
 }: AppModalProps) {
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle
         sx={{
           display: 'flex',
