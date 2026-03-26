@@ -6,8 +6,8 @@ import {
   TableHead,
   TableRow,
   TableSortLabel,
-} from '@mui/material';
-import type { ReactNode } from 'react';
+} from "@mui/material";
+import type { ReactNode } from "react";
 
 export interface Column<T> {
   key: string;
@@ -19,7 +19,7 @@ export interface Column<T> {
 interface DataTableProps<T> {
   data: T[];
   columns: Column<T>[];
-  order?: 'asc' | 'desc';
+  order?: "asc" | "desc";
   orderBy?: string;
   onSort?: (key: string) => void;
 }
@@ -35,21 +35,21 @@ export function DataTable<T>({
     <Paper
       elevation={0}
       sx={{
-        border: '1px solid',
-        borderColor: 'divider',
+        border: "1px solid",
+        borderColor: "divider",
         borderRadius: 3,
-        overflow: 'hidden',
+        overflow: "hidden",
       }}
     >
       <Table>
         <TableHead>
-          <TableRow sx={{ bgcolor: '#f8fafc' }}>
+          <TableRow sx={{ bgcolor: "#f8fafc" }}>
             {columns.map((column) => (
               <TableCell key={column.key}>
                 {column.sortable ? (
                   <TableSortLabel
                     active={orderBy === column.key}
-                    direction={orderBy === column.key ? order : 'asc'}
+                    direction={orderBy === column.key ? order : "asc"}
                     onClick={() => onSort?.(column.key)}
                   >
                     {column.title}
@@ -63,13 +63,25 @@ export function DataTable<T>({
         </TableHead>
 
         <TableBody>
-          {data.map((row, index) => (
-            <TableRow key={index} hover>
-              {columns.map((column) => (
-                <TableCell key={column.key}>{column.render(row)}</TableCell>
-              ))}
+          {data.length === 0 ? (
+            <TableRow>
+              <TableCell
+                colSpan={columns.length}
+                align="center"
+                sx={{ py: 5, color: "text.secondary" }}
+              >
+                No Information
+              </TableCell>
             </TableRow>
-          ))}
+          ) : (
+            data.map((row, index) => (
+              <TableRow key={index} hover>
+                {columns.map((column) => (
+                  <TableCell key={column.key}>{column.render(row)}</TableCell>
+                ))}
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     </Paper>

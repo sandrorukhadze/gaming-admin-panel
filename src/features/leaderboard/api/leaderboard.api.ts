@@ -1,7 +1,14 @@
-import { apiClient } from '@/shared/api/client';
-import type { Leaderboard } from '../model/leaderboard.types';
+import { apiClient } from "@/shared/api/client";
+import type { Leaderboard } from "../model/leaderboard.types";
 
 export async function getLeaderboards(): Promise<Leaderboard[]> {
-  const response = await apiClient.get<Leaderboard[]>('/leaderboards');
+  const response = await apiClient.get<Leaderboard[]>("/leaderboards");
+  return response.data;
+}
+
+export async function createLeaderboard(
+  payload: Leaderboard,
+): Promise<Leaderboard> {
+  const response = await apiClient.post<Leaderboard>("/leaderboards", payload);
   return response.data;
 }

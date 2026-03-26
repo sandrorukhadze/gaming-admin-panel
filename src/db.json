@@ -43,6 +43,72 @@
       "maxParticipants": 50,
       "createdAt": "2026-03-01T00:00:00.000Z",
       "updatedAt": "2026-03-01T00:00:00.000Z"
+    },
+    {
+      "id": "kmsq7yGIZys",
+      "title": "მაფია",
+      "description": "მაფია2",
+      "startDate": "2026-03-26T19:34:00.000Z",
+      "endDate": "2026-03-27T19:34:00.000Z",
+      "status": "active",
+      "scoringType": "points",
+      "prizes": [],
+      "maxParticipants": 2,
+      "createdAt": "2026-03-26T19:34:45.084Z",
+      "updatedAt": "2026-03-26T19:34:45.084Z"
+    },
+    {
+      "id": "1iUYd33zXJQ",
+      "title": "მაფია",
+      "description": "მაფია2",
+      "startDate": "2026-03-26T19:34:00.000Z",
+      "endDate": "2026-03-27T19:34:00.000Z",
+      "status": "active",
+      "scoringType": "points",
+      "prizes": [],
+      "maxParticipants": 2,
+      "createdAt": "2026-03-26T19:34:50.461Z",
+      "updatedAt": "2026-03-26T19:34:50.461Z"
+    },
+    {
+      "id": "CS4siVyJ6Nw",
+      "title": "1231",
+      "description": "321312",
+      "startDate": "2026-03-12T19:35:00.000Z",
+      "endDate": "2026-03-20T19:35:00.000Z",
+      "status": "draft",
+      "scoringType": "points",
+      "prizes": [],
+      "maxParticipants": 2,
+      "createdAt": "2026-03-26T19:35:09.613Z",
+      "updatedAt": "2026-03-26T19:35:09.613Z"
+    },
+    {
+      "id": "FRKlfg0LkJM",
+      "title": "1231",
+      "description": "321312",
+      "startDate": "2026-03-12T19:35:00.000Z",
+      "endDate": "2026-03-20T19:35:00.000Z",
+      "status": "draft",
+      "scoringType": "points",
+      "prizes": [],
+      "maxParticipants": 2,
+      "createdAt": "2026-03-26T19:37:39.250Z",
+      "updatedAt": "2026-03-26T19:37:39.250Z"
+    },
+    {
+      "id": "XWbY7wPtxmw",
+      "title": "23გფდგფდგ",
+      "description": "3213გფდგდ",
+      "startDate": "2026-03-19T19:38:00.000Z",
+      "endDate": "2026-03-21T19:38:00.000Z",
+      "status": "active",
+      "scoringType": "wins",
+      "prizes": [],
+      "maxParticipants": 3,
+      "createdAt": "2026-03-26T19:38:10.048Z",
+      "updatedAt": "2026-03-26T19:38:10.048Z"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
