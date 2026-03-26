@@ -1,0 +1,48 @@
+{
+  "leaderboards": [
+    {
+      "id": "1",
+      "title": "Weekly Tournament",
+      "description": "Top players of the week",
+      "startDate": "2026-03-01T00:00:00.000Z",
+      "endDate": "2026-03-07T23:59:59.000Z",
+      "status": "active",
+      "scoringType": "points",
+      "prizes": [
+        {
+          "id": "p1",
+          "rank": 1,
+          "name": "Gold Prize",
+          "type": "coins",
+          "amount": 1000,
+          "imageUrl": ""
+        }
+      ],
+      "maxParticipants": 100,
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-01T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "Monthly Wins",
+      "description": "Most wins in a month",
+      "startDate": "2026-03-01T00:00:00.000Z",
+      "endDate": "2026-03-31T23:59:59.000Z",
+      "status": "draft",
+      "scoringType": "wins",
+      "prizes": [
+        {
+          "id": "p2",
+          "rank": 1,
+          "name": "Bonus Pack",
+          "type": "bonus",
+          "amount": 500,
+          "imageUrl": ""
+        }
+      ],
+      "maxParticipants": 50,
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-01T00:00:00.000Z"
+    }
+  ]
+}
