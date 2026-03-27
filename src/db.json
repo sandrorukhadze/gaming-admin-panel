@@ -77,6 +77,32 @@
       "maxParticipants": 2,
       "createdAt": "2026-03-26T20:09:43.502Z",
       "updatedAt": "2026-03-26T20:09:43.502Z"
+    },
+    {
+      "id": "ixjPH8x",
+      "title": "ფფდფდსფ",
+      "description": "ფდფდფ",
+      "startDate": "2026-03-03T06:29:00.000Z",
+      "endDate": "2026-03-13T06:29:00.000Z",
+      "status": "draft",
+      "scoringType": "points",
+      "prizes": [],
+      "maxParticipants": 2,
+      "createdAt": "2026-03-27T06:29:11.884Z",
+      "updatedAt": "2026-03-27T06:29:11.884Z"
+    },
+    {
+      "id": "xTmNE2y",
+      "title": "2312312",
+      "description": "321312",
+      "startDate": "2026-03-11T06:29:00.000Z",
+      "endDate": "2026-03-28T06:29:00.000Z",
+      "status": "draft",
+      "scoringType": "points",
+      "prizes": [],
+      "maxParticipants": 2,
+      "createdAt": "2026-03-27T06:29:21.043Z",
+      "updatedAt": "2026-03-27T06:29:21.043Z"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

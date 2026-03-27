@@ -8,6 +8,7 @@ import {
   MenuItem,
   Select,
   Stack,
+  TablePagination,
   Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -62,8 +63,27 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [deleteTitle, setDeleteTitle] = useState<string>("");
+  const [page, setPage] = useState<number>(0);
 
-  const { mutateAsync, isPending } = useDeleteLeaderboard();
+  const rowsPerPage = 5;
+
+  const { mutateAsync: deleteLeaderboard, isPending: isDeletePending } =
+    useDeleteLeaderboard();
+
+  function handleSort(key: string) {
+    const isAsc = orderBy === key && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(key);
+    setPage(0);
+  }
+
+  function handleOpenCreateModal() {
+    setIsCreateModalOpen(true);
+  }
+
+  function handleCloseCreateModal() {
+    setIsCreateModalOpen(false);
+  }
 
   function handleOpenDelete(row: Leaderboard) {
     setDeleteId(row.id);
@@ -76,24 +96,16 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
   }
 
   async function handleConfirmDelete() {
-    if (!deleteId) return;
+    if (deleteId === null) {
+      return;
+    }
 
-    await mutateAsync(deleteId);
-    handleCloseDelete();
-  }
-
-  function handleSort(key: string) {
-    const isAsc = orderBy === key && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(key);
-  }
-
-  function handleOpenCreateModal() {
-    setIsCreateModalOpen(true);
-  }
-
-  function handleCloseCreateModal() {
-    setIsCreateModalOpen(false);
+    try {
+      await deleteLeaderboard(deleteId);
+      handleCloseDelete();
+    } catch {
+      handleCloseDelete();
+    }
   }
 
   const filteredData = useMemo(() => {
@@ -136,6 +148,11 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
 
     return sorted;
   }, [filteredData, orderBy, order]);
+
+  const paginatedData = useMemo(() => {
+    const start = page * rowsPerPage;
+    return sortedData.slice(start, start + rowsPerPage);
+  }, [sortedData, page]);
 
   const columns: Column<Leaderboard>[] = [
     {
@@ -241,23 +258,22 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
         alignItems="center"
         mb={2}
       >
-        <Stack direction="row" spacing={2}>
-          <FormControl size="small" sx={{ minWidth: 180 }}>
-            <InputLabel>Status</InputLabel>
-            <Select
-              value={statusFilter}
-              label="Status"
-              onChange={(event) =>
-                setStatusFilter(event.target.value as StatusFilter)
-              }
-            >
-              <MenuItem value="all">All</MenuItem>
-              <MenuItem value="draft">Draft</MenuItem>
-              <MenuItem value="active">Active</MenuItem>
-              <MenuItem value="completed">Completed</MenuItem>
-            </Select>
-          </FormControl>
-        </Stack>
+        <FormControl size="small" sx={{ minWidth: 180 }}>
+          <InputLabel>Status</InputLabel>
+          <Select
+            value={statusFilter}
+            label="Status"
+            onChange={(event) => {
+              setStatusFilter(event.target.value as StatusFilter);
+              setPage(0);
+            }}
+          >
+            <MenuItem value="all">All</MenuItem>
+            <MenuItem value="draft">Draft</MenuItem>
+            <MenuItem value="active">Active</MenuItem>
+            <MenuItem value="completed">Completed</MenuItem>
+          </Select>
+        </FormControl>
 
         <Button
           variant="contained"
@@ -268,13 +284,35 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
         </Button>
       </Stack>
 
-      <DataTable
-        data={sortedData}
-        columns={columns}
-        order={order}
-        orderBy={orderBy}
-        onSort={handleSort}
-      />
+      {sortedData.length === 0 ? (
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          textAlign="center"
+          mt={4}
+        >
+          No information
+        </Typography>
+      ) : (
+        <>
+          <DataTable
+            data={paginatedData}
+            columns={columns}
+            order={order}
+            orderBy={orderBy}
+            onSort={handleSort}
+          />
+
+          <TablePagination
+            component="div"
+            count={sortedData.length}
+            page={page}
+            onPageChange={(_, newPage) => setPage(newPage)}
+            rowsPerPage={rowsPerPage}
+            rowsPerPageOptions={[5]}
+          />
+        </>
+      )}
 
       <CreateLeaderboardModal
         open={isCreateModalOpen}
@@ -288,9 +326,9 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
         description={`Are you sure you want to delete "${deleteTitle}"?`}
         confirmText="Delete"
         cancelText="Cancel"
-        loading={isPending}
         onConfirm={handleConfirmDelete}
         onCancel={handleCloseDelete}
+        loading={isDeletePending}
       />
     </>
   );
