@@ -1,15 +1,21 @@
-import { Paper, Typography } from '@mui/material';
+import { Alert, Box, CircularProgress } from '@mui/material';
+import { useRaffles } from '../hooks/useRaffles';
+import { RaffleTable } from '../components/RaffleTable';
 
 export function RafflesPage() {
-  return (
-    <Paper sx={{ p: 3 }}>
-      <Typography variant="h5" mb={1}>
-        Raffles
-      </Typography>
+  const { data, isLoading, isError } = useRaffles();
 
-      <Typography color="text.secondary">
-        Raffle management page
-      </Typography>
-    </Paper>
-  );
+  if (isLoading) {
+    return (
+      <Box display="flex" justifyContent="center" mt={4}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (isError || !data) {
+    return <Alert severity="error">Failed to load raffles</Alert>;
+  }
+
+  return <RaffleTable data={data} />;
 }
