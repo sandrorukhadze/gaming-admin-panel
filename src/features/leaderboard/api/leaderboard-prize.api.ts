@@ -5,3 +5,7 @@ export async function getLeaderboardPrizes(): Promise<LeaderboardPrize[]> {
   const response = await apiClient.get<LeaderboardPrize[]>('/leaderboardPrizes');
   return response.data;
 }
+
+export async function deleteLeaderboardPrize(id: string): Promise<void> {
+  await apiClient.delete(`/leaderboardPrizes/${id}`);
+}
