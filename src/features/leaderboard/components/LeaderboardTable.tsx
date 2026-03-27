@@ -1,25 +1,13 @@
 import { useMemo, useState } from "react";
-import {
-  Button,
-  Chip,
-  FormControl,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TablePagination,
-  Typography,
-} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { Chip, TablePagination, Typography, Stack } from "@mui/material";
 import type { Leaderboard } from "../model/leaderboard.types";
 import { DataTable, type Column } from "@/shared/ui/DataTable";
 import { CreateLeaderboardModal } from "./CreateLeaderboardModal";
 import { ConfirmModal } from "@/shared/ui/ConfirmModal";
 import { useDeleteLeaderboard } from "../hooks/useDeleteLeaderboard";
+import { LeaderboardTableToolbar } from "./LeaderboardTableToolbar";
+import { LeaderboardTableActions } from "./LeaderboardTableActions";
+import { EditLeaderboardModal } from "./EditLeaderboardModal";
 
 interface LeaderboardTableProps {
   data: Leaderboard[];
@@ -64,8 +52,9 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [deleteTitle, setDeleteTitle] = useState<string>("");
   const [page, setPage] = useState<number>(0);
+  const [editItem, setEditItem] = useState<Leaderboard | null>(null);
 
-  const rowsPerPage = 5;
+  const rowsPerPage = 3;
 
   const { mutateAsync: deleteLeaderboard, isPending: isDeletePending } =
     useDeleteLeaderboard();
@@ -102,10 +91,17 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
 
     try {
       await deleteLeaderboard(deleteId);
-      handleCloseDelete();
-    } catch {
+    } finally {
       handleCloseDelete();
     }
+  }
+
+  function handleOpenEdit(row: Leaderboard) {
+    setEditItem(row);
+  }
+
+  function handleCloseEdit() {
+    setEditItem(null);
   }
 
   const filteredData = useMemo(() => {
@@ -216,32 +212,11 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
       key: "actions",
       title: "Actions",
       render: (row) => (
-        <Stack direction="row" spacing={1}>
-          <IconButton
-            size="small"
-            color="primary"
-            aria-label={`View ${row.title}`}
-          >
-            <VisibilityOutlinedIcon fontSize="small" />
-          </IconButton>
-
-          <IconButton
-            size="small"
-            color="secondary"
-            aria-label={`Edit ${row.title}`}
-          >
-            <EditOutlinedIcon fontSize="small" />
-          </IconButton>
-
-          <IconButton
-            size="small"
-            color="error"
-            aria-label={`Delete ${row.title}`}
-            onClick={() => handleOpenDelete(row)}
-          >
-            <DeleteOutlineOutlinedIcon fontSize="small" />
-          </IconButton>
-        </Stack>
+        <LeaderboardTableActions
+          row={row}
+          onDelete={handleOpenDelete}
+          onEdit={handleOpenEdit}
+        />
       ),
     },
   ];
@@ -252,37 +227,14 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
         Leaderboards
       </Typography>
 
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        mb={2}
-      >
-        <FormControl size="small" sx={{ minWidth: 180 }}>
-          <InputLabel>Status</InputLabel>
-          <Select
-            value={statusFilter}
-            label="Status"
-            onChange={(event) => {
-              setStatusFilter(event.target.value as StatusFilter);
-              setPage(0);
-            }}
-          >
-            <MenuItem value="all">All</MenuItem>
-            <MenuItem value="draft">Draft</MenuItem>
-            <MenuItem value="active">Active</MenuItem>
-            <MenuItem value="completed">Completed</MenuItem>
-          </Select>
-        </FormControl>
-
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={handleOpenCreateModal}
-        >
-          Add
-        </Button>
-      </Stack>
+      <LeaderboardTableToolbar
+        statusFilter={statusFilter}
+        onStatusChange={(value) => {
+          setStatusFilter(value);
+          setPage(0);
+        }}
+        onAdd={handleOpenCreateModal}
+      />
 
       {sortedData.length === 0 ? (
         <Typography
@@ -318,6 +270,12 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
         open={isCreateModalOpen}
         onClose={handleCloseCreateModal}
         existingLeaderboards={data}
+      />
+
+      <EditLeaderboardModal
+        open={editItem !== null}
+        onClose={handleCloseEdit}
+        leaderboard={editItem}
       />
 
       <ConfirmModal

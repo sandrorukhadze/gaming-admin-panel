@@ -19,3 +19,15 @@ export async function createLeaderboard(
 export async function deleteLeaderboard(id: number) {
   await apiClient.delete(`/leaderboards/${id}`);
 }
+
+export async function updateLeaderboard(
+  id: number,
+  payload: Leaderboard
+): Promise<Leaderboard> {
+  const response = await apiClient.put<Leaderboard>(
+    `/leaderboards/${id}`,
+    payload
+  );
+
+  return response.data;
+}
