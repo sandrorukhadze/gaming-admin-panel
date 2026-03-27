@@ -60,21 +60,25 @@ export function LeaderboardPrizeCardList({
         </Button>
       </Stack>
 
-      <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
-        {data.map((prize) => (
-          <Stack
-            key={prize.id}
-            sx={{
-              width: 'calc((100% - 32px) / 3)',
-            }}
-          >
-            <LeaderboardPrizeCard
-              prize={prize}
-              onDelete={handleOpenDelete}
-            />
-          </Stack>
-        ))}
-      </Stack>
+      {data.length === 0 ? (
+        <Typography color="text.secondary">No information</Typography>
+      ) : (
+        <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+          {data.map((prize) => (
+            <Stack
+              key={prize.id}
+              sx={{
+                width: 'calc((100% - 32px) / 3)',
+              }}
+            >
+              <LeaderboardPrizeCard
+                prize={prize}
+                onDelete={handleOpenDelete}
+              />
+            </Stack>
+          ))}
+        </Stack>
+      )}
 
       <CreatePrizeModal
         open={isCreateOpen}

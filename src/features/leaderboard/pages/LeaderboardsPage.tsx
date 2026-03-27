@@ -1,8 +1,8 @@
-import { Alert, Box, CircularProgress, Stack, Typography } from '@mui/material';
-import { useLeaderboards } from '../hooks/useLeaderboards';
-import { useLeaderboardPrizes } from '../hooks/useLeaderboardPrizes';
-import { LeaderboardTable } from '../components/LeaderboardTable';
-import { LeaderboardPrizeCardList } from '../components/LeaderboardPrizeCardList';
+import { Alert, Box, CircularProgress, Stack } from "@mui/material";
+import { useLeaderboards } from "../hooks/useLeaderboards";
+import { useLeaderboardPrizes } from "../hooks/useLeaderboardPrizes";
+import { LeaderboardTable } from "../components/LeaderboardTable";
+import { LeaderboardPrizeCardList } from "../components/LeaderboardPrizeCardList";
 
 export function LeaderboardsPage() {
   const {
@@ -44,13 +44,9 @@ export function LeaderboardsPage() {
           Leaderboard Prizes
         </Typography> */}
 
-        {prizes.length === 0 ? (
-          <Typography color="text.secondary">
-            No prize information
-          </Typography>
-        ) : (
-          <LeaderboardPrizeCardList data={prizes} />
-        )}
+        <Box>
+          <LeaderboardPrizeCardList data={prizes ?? []} />
+        </Box>
       </Box>
     </Stack>
   );

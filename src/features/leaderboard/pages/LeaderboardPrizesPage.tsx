@@ -1,4 +1,4 @@
-import { Alert, Box, CircularProgress, Typography } from '@mui/material';
+import { Alert, Box, CircularProgress } from '@mui/material';
 import { useLeaderboardPrizes } from '../hooks/useLeaderboardPrizes';
 import { LeaderboardPrizeCardList } from '../components/LeaderboardPrizeCardList';
 
@@ -13,17 +13,10 @@ export function LeaderboardPrizesPage() {
     );
   }
 
-  if (isError || !data) {
+  if (isError) {
     return <Alert severity="error">Failed to load prizes</Alert>;
   }
 
-  if (data.length === 0) {
-    return (
-      <Typography textAlign="center" color="text.secondary" mt={6}>
-        No information
-      </Typography>
-    );
-  }
-
-  return <LeaderboardPrizeCardList data={data} />;
+  return <LeaderboardPrizeCardList data={data ?? []} />;
 }
+
