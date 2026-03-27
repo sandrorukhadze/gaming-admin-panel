@@ -95,6 +95,14 @@
       "type": "coins",
       "amount": 7,
       "imageUrl": "https://th.bing.com/th/id/OIP.95hu4jseooNDi4tURYGW_QHaE1?w=257&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
+    },
+    {
+      "id": "fc4079c3-942a-4474-bf62-c08c04cdd614",
+      "rank": 3,
+      "name": "rewr",
+      "type": "coins",
+      "amount": 33,
+      "imageUrl": "https://th.bing.com/th/id/OIP.95hu4jseooNDi4tURYGW_QHaE1?w=257&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
     }
   ],
   "raffles": [
@@ -111,6 +119,24 @@
       "totalTicketLimit": 321,
       "createdAt": "2026-03-27T17:46:16.078Z",
       "updatedAt": "2026-03-27T17:48:43.901Z"
+    }
+  ],
+  "rafflePrizes": [
+    {
+      "id": "1",
+      "rank": 1,
+      "name": "Gold Coins",
+      "type": "coins",
+      "amount": 1000,
+      "imageUrl": "https://picsum.photos/300/200?random=101"
+    },
+    {
+      "id": "2",
+      "rank": 2,
+      "name": "Free Spins Pack",
+      "type": "freeSpin",
+      "amount": 50,
+      "imageUrl": "https://picsum.photos/300/200?random=102"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

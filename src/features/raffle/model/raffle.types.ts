@@ -12,3 +12,12 @@ export interface Raffle {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface RafflePrize {
+  id: string;
+  rank: number;
+  name: string;
+  type: 'coins' | 'freeSpin' | 'bonus';
+  amount: number;
+  imageUrl: string;
+}
