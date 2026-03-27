@@ -8,12 +8,14 @@ interface LeaderboardTableActionsProps {
   row: Leaderboard;
   onDelete: (row: Leaderboard) => void;
   onEdit: (row: Leaderboard) => void;
+  onView: (row: Leaderboard) => void;
 }
 
 export function LeaderboardTableActions({
   row,
   onDelete,
   onEdit,
+  onView,
 }: LeaderboardTableActionsProps) {
   return (
     <Stack direction="row" spacing={1}>
@@ -21,6 +23,7 @@ export function LeaderboardTableActions({
         size="small"
         color="primary"
         aria-label={`View ${row.title}`}
+        onClick={() => onView(row)}
       >
         <VisibilityOutlinedIcon fontSize="small" />
       </IconButton>

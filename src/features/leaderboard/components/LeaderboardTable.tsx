@@ -8,6 +8,7 @@ import { useDeleteLeaderboard } from "../hooks/useDeleteLeaderboard";
 import { LeaderboardTableToolbar } from "./LeaderboardTableToolbar";
 import { LeaderboardTableActions } from "./LeaderboardTableActions";
 import { EditLeaderboardModal } from "./EditLeaderboardModal";
+import { ViewLeaderboardModal } from "./ViewLeaderboardModal";
 
 interface LeaderboardTableProps {
   data: Leaderboard[];
@@ -53,6 +54,7 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
   const [deleteTitle, setDeleteTitle] = useState<string>("");
   const [page, setPage] = useState<number>(0);
   const [editItem, setEditItem] = useState<Leaderboard | null>(null);
+  const [viewId, setViewId] = useState<number | null>(null);
 
   const rowsPerPage = 3;
 
@@ -82,6 +84,14 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
   function handleCloseDelete() {
     setDeleteId(null);
     setDeleteTitle("");
+  }
+
+  function handleOpenView(row: Leaderboard) {
+    setViewId(row.id);
+  }
+
+  function handleCloseView() {
+    setViewId(null);
   }
 
   async function handleConfirmDelete() {
@@ -216,6 +226,7 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
           row={row}
           onDelete={handleOpenDelete}
           onEdit={handleOpenEdit}
+          onView={handleOpenView}
         />
       ),
     },
@@ -276,6 +287,12 @@ export function LeaderboardTable({ data }: LeaderboardTableProps) {
         open={editItem !== null}
         onClose={handleCloseEdit}
         leaderboard={editItem}
+      />
+
+      <ViewLeaderboardModal
+        open={viewId !== null}
+        onClose={handleCloseView}
+        leaderboardId={viewId}
       />
 
       <ConfirmModal

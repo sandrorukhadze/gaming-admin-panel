@@ -6,13 +6,15 @@ export async function getLeaderboards(): Promise<Leaderboard[]> {
   return response.data;
 }
 
+export async function getLeaderboardById(id: number): Promise<Leaderboard> {
+  const response = await apiClient.get<Leaderboard>(`/leaderboards/${id}`);
+  return response.data;
+}
+
 export async function createLeaderboard(
-  payload: Omit<Leaderboard, 'id'>
+  payload: Omit<Leaderboard, "id">,
 ): Promise<Leaderboard> {
-  const response = await apiClient.post<Leaderboard>(
-    '/leaderboards',
-    payload
-  );
+  const response = await apiClient.post<Leaderboard>("/leaderboards", payload);
   return response.data;
 }
 
@@ -22,11 +24,11 @@ export async function deleteLeaderboard(id: number) {
 
 export async function updateLeaderboard(
   id: number,
-  payload: Leaderboard
+  payload: Leaderboard,
 ): Promise<Leaderboard> {
   const response = await apiClient.put<Leaderboard>(
     `/leaderboards/${id}`,
-    payload
+    payload,
   );
 
   return response.data;
