@@ -1,18 +1,12 @@
 import { useMemo, useState } from 'react';
-import {
-  Box,
-  Chip,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TablePagination,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Chip, TablePagination, Typography, Stack } from '@mui/material';
 import { DataTable, type Column } from '@/shared/ui/DataTable';
+import { ConfirmModal } from '@/shared/ui/ConfirmModal';
 import type { Raffle } from '../model/raffle.types';
+import { RaffleTableToolbar } from './RaffleTableToolbar';
+import { RaffleTableActions } from './RaffleTableActions';
+import { ViewRaffleModal } from './ViewRaffleModal';
+import { useDeleteRaffle } from '../hooks/useDeleteRaffle';
 
 interface RaffleTableProps {
   data: Raffle[];
@@ -72,14 +66,50 @@ export function RaffleTable({ data }: RaffleTableProps) {
   const [orderBy, setOrderBy] = useState<string>('name');
   const [order, setOrder] = useState<Order>('asc');
   const [page, setPage] = useState<number>(0);
+  const [viewId, setViewId] = useState<string | null>(null);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [deleteName, setDeleteName] = useState<string>('');
 
   const rowsPerPage = 5;
+
+  const { mutateAsync: deleteRaffle, isPending: isDeletePending } =
+    useDeleteRaffle();
 
   function handleSort(key: string) {
     const isAsc = orderBy === key && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(key);
     setPage(0);
+  }
+
+  function handleOpenView(row: Raffle) {
+    setViewId(row.id);
+  }
+
+  function handleCloseView() {
+    setViewId(null);
+  }
+
+  function handleOpenDelete(row: Raffle) {
+    setDeleteId(row.id);
+    setDeleteName(row.name);
+  }
+
+  function handleCloseDelete() {
+    setDeleteId(null);
+    setDeleteName('');
+  }
+
+  async function handleConfirmDelete() {
+    if (!deleteId) {
+      return;
+    }
+
+    try {
+      await deleteRaffle(deleteId);
+    } finally {
+      handleCloseDelete();
+    }
   }
 
   const filteredData = useMemo(() => {
@@ -208,6 +238,17 @@ export function RaffleTable({ data }: RaffleTableProps) {
       sortable: true,
       render: (row) => new Date(row.drawDate).toLocaleDateString(),
     },
+    {
+      key: 'actions',
+      title: 'Actions',
+      render: (row) => (
+        <RaffleTableActions
+          row={row}
+          onView={handleOpenView}
+          onDelete={handleOpenDelete}
+        />
+      ),
+    },
   ];
 
   return (
@@ -216,49 +257,23 @@ export function RaffleTable({ data }: RaffleTableProps) {
         Raffles
       </Typography>
 
-      <Stack direction="row" spacing={2} mb={2} flexWrap="wrap" useFlexGap>
-        <FormControl size="small" sx={{ minWidth: 180 }}>
-          <InputLabel>Status</InputLabel>
-          <Select
-            value={statusFilter}
-            label="Status"
-            onChange={(event) => {
-              setStatusFilter(event.target.value as StatusFilter);
-              setPage(0);
-            }}
-          >
-            <MenuItem value="all">All</MenuItem>
-            <MenuItem value="draft">Draft</MenuItem>
-            <MenuItem value="active">Active</MenuItem>
-            <MenuItem value="drawn">Drawn</MenuItem>
-            <MenuItem value="cancelled">Cancelled</MenuItem>
-          </Select>
-        </FormControl>
-
-        <TextField
-          size="small"
-          label="From"
-          type="date"
-          value={startDateFilter}
-          onChange={(event) => {
-            setStartDateFilter(event.target.value);
-            setPage(0);
-          }}
-          InputLabelProps={{ shrink: true }}
-        />
-
-        <TextField
-          size="small"
-          label="To"
-          type="date"
-          value={endDateFilter}
-          onChange={(event) => {
-            setEndDateFilter(event.target.value);
-            setPage(0);
-          }}
-          InputLabelProps={{ shrink: true }}
-        />
-      </Stack>
+      <RaffleTableToolbar
+        statusFilter={statusFilter}
+        startDateFilter={startDateFilter}
+        endDateFilter={endDateFilter}
+        onStatusChange={(value) => {
+          setStatusFilter(value);
+          setPage(0);
+        }}
+        onStartDateChange={(value) => {
+          setStartDateFilter(value);
+          setPage(0);
+        }}
+        onEndDateChange={(value) => {
+          setEndDateFilter(value);
+          setPage(0);
+        }}
+      />
 
       {sortedData.length === 0 ? (
         <Typography color="text.secondary">No information</Typography>
@@ -284,6 +299,23 @@ export function RaffleTable({ data }: RaffleTableProps) {
           </Box>
         </>
       )}
+
+      <ViewRaffleModal
+        open={viewId !== null}
+        onClose={handleCloseView}
+        raffleId={viewId}
+      />
+
+      <ConfirmModal
+        open={deleteId !== null}
+        title="Delete raffle"
+        description={`Are you sure you want to delete "${deleteName}"?`}
+        confirmText="Delete"
+        cancelText="Cancel"
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCloseDelete}
+        loading={isDeletePending}
+      />
     </>
   );
 }

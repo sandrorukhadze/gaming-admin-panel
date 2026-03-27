@@ -64,6 +64,19 @@
       "maxParticipants": 6,
       "createdAt": "2026-03-27T06:43:01.675Z",
       "updatedAt": "2026-03-27T06:43:01.675Z"
+    },
+    {
+      "id": 7,
+      "title": "7677",
+      "description": "7676",
+      "startDate": "2026-03-13T16:34:00.000Z",
+      "endDate": "2026-03-20T16:34:00.000Z",
+      "status": "draft",
+      "scoringType": "points",
+      "prizes": [],
+      "maxParticipants": 6,
+      "createdAt": "2026-03-27T16:34:56.248Z",
+      "updatedAt": "2026-03-27T16:34:56.248Z"
     }
   ],
   "leaderboardPrizes": [
@@ -76,29 +89,15 @@
       "imageUrl": "https://th.bing.com/th/id/OIP.95hu4jseooNDi4tURYGW_QHaE1?w=257&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
     },
     {
-      "id": "8820edd6-7222-42c1-b763-7115002ce069",
+      "id": "55855e15-342f-476b-b87e-6dc9f6a81e0e",
       "rank": 2,
       "name": "Free Spiner 10",
       "type": "coins",
-      "amount": 2,
+      "amount": 7,
       "imageUrl": "https://th.bing.com/th/id/OIP.95hu4jseooNDi4tURYGW_QHaE1?w=257&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
     }
   ],
   "raffles": [
-    {
-      "id": "r1",
-      "name": "Spring Raffle",
-      "description": "Seasonal raffle campaign",
-      "startDate": "2026-03-01T00:00:00.000Z",
-      "endDate": "2026-03-20T23:59:59.000Z",
-      "drawDate": "2026-03-21T12:00:00.000Z",
-      "status": "active",
-      "ticketPrice": 10,
-      "maxTicketsPerUser": 5,
-      "totalTicketLimit": 1000,
-      "createdAt": "2026-03-01T00:00:00.000Z",
-      "updatedAt": "2026-03-01T00:00:00.000Z"
-    },
     {
       "id": "r2",
       "name": "VIP Bonus Draw",
