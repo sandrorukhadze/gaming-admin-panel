@@ -66,7 +66,6 @@
       "updatedAt": "2026-03-27T06:43:01.675Z"
     }
   ],
-
   "leaderboardPrizes": [
     {
       "id": "p1",
@@ -77,20 +76,20 @@
       "imageUrl": "https://th.bing.com/th/id/OIP.5zGTarbk52s9rTVh88LOngHaHa?w=173&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
     },
     {
-      "id": "p2",
+      "id": "b81456a2-9f18-4004-ab91-8401add89a58",
       "rank": 2,
-      "name": "Free Spins Pack",
-      "type": "freeSpin",
-      "amount": 50,
-      "imageUrl": "https://th.bing.com/th/id/OIP.pfOn4JrHe9nJCC5fse-6YQHaEO?w=275&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
+      "name": "321312",
+      "type": "coins",
+      "amount": 4324,
+      "imageUrl": "https://th.bing.com/th/id/OIP.1zksle8EkTvWnVXbVo1jFwEsDD?w=261&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
     },
     {
-      "id": "p3",
+      "id": "fa744610-c69d-4fec-851a-76b0cc9a0ff0",
       "rank": 3,
-      "name": "Welcome Bonus",
-      "type": "bonus",
-      "amount": 250,
-      "imageUrl": "https://th.bing.com/th/id/OIP._xNvMeCliC2VYLiGeEEUBQHaFj?w=238&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
+      "name": "5435345",
+      "type": "coins",
+      "amount": 54353,
+      "imageUrl": "https://th.bing.com/th/id/OIP.1zksle8EkTvWnVXbVo1jFwEsDD?w=261&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

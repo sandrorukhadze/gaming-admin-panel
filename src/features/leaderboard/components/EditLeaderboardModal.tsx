@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Box, Button, MenuItem, Stack, TextField } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AppModal } from '@/shared/ui/AppModal';
-import { ConfirmModal } from '@/shared/ui/ConfirmModal';
-import { useUpdateLeaderboard } from '../hooks/useUpdateLeaderboard';
+import { useEffect, useState } from "react";
+import { Box, Button, MenuItem, Stack, TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AppModal } from "@/shared/ui/AppModal";
+import { ConfirmModal } from "@/shared/ui/ConfirmModal";
+import { useUpdateLeaderboard } from "../hooks/useUpdateLeaderboard";
 import {
   createLeaderboardSchema,
   type CreateLeaderboardFormInput,
   type CreateLeaderboardFormValues,
-} from '../model/leaderboard.schema';
-import type { Leaderboard } from '../model/leaderboard.types';
+} from "../model/leaderboard.schema";
+import type { Leaderboard } from "../model/leaderboard.types";
 
 interface EditLeaderboardModalProps {
   open: boolean;
@@ -20,13 +20,13 @@ interface EditLeaderboardModalProps {
 
 function getDefaultValues(): CreateLeaderboardFormInput {
   return {
-    title: '',
-    description: '',
-    startDate: '',
-    endDate: '',
-    status: 'draft',
-    scoringType: 'points',
-    maxParticipants: '' as unknown as number,
+    title: "",
+    description: "",
+    startDate: "",
+    endDate: "",
+    status: "draft",
+    scoringType: "points",
+    maxParticipants: "" as unknown as number,
   };
 }
 
@@ -44,10 +44,12 @@ export function EditLeaderboardModal({
     handleSubmit,
     reset,
     formState: { errors, isSubmitting, isDirty },
-  } = useForm<CreateLeaderboardFormInput, unknown, CreateLeaderboardFormValues>({
-    resolver: zodResolver(createLeaderboardSchema),
-    defaultValues: getDefaultValues(),
-  });
+  } = useForm<CreateLeaderboardFormInput, unknown, CreateLeaderboardFormValues>(
+    {
+      resolver: zodResolver(createLeaderboardSchema),
+      defaultValues: getDefaultValues(),
+    },
+  );
 
   useEffect(() => {
     if (!leaderboard) {
@@ -118,7 +120,7 @@ export function EditLeaderboardModal({
           <Stack spacing={2}>
             <TextField
               label="Title"
-              {...register('title')}
+              {...register("title")}
               error={!!errors.title}
               helperText={errors.title?.message}
             />
@@ -126,7 +128,7 @@ export function EditLeaderboardModal({
             <TextField
               label="Description"
               multiline
-              {...register('description')}
+              {...register("description")}
               error={!!errors.description}
               helperText={errors.description?.message}
             />
@@ -135,7 +137,7 @@ export function EditLeaderboardModal({
               label="Start Date"
               type="datetime-local"
               InputLabelProps={{ shrink: true }}
-              {...register('startDate')}
+              {...register("startDate")}
               error={!!errors.startDate}
               helperText={errors.startDate?.message}
             />
@@ -144,7 +146,7 @@ export function EditLeaderboardModal({
               label="End Date"
               type="datetime-local"
               InputLabelProps={{ shrink: true }}
-              {...register('endDate')}
+              {...register("endDate")}
               error={!!errors.endDate}
               helperText={errors.endDate?.message}
             />
@@ -153,7 +155,7 @@ export function EditLeaderboardModal({
               select
               label="Status"
               defaultValue="draft"
-              {...register('status')}
+              {...register("status")}
               error={!!errors.status}
               helperText={errors.status?.message}
             >
@@ -166,7 +168,7 @@ export function EditLeaderboardModal({
               select
               label="Scoring Type"
               defaultValue="points"
-              {...register('scoringType')}
+              {...register("scoringType")}
               error={!!errors.scoringType}
               helperText={errors.scoringType?.message}
             >
@@ -178,7 +180,7 @@ export function EditLeaderboardModal({
             <TextField
               label="Max Participants"
               type="number"
-              {...register('maxParticipants')}
+              {...register("maxParticipants")}
               error={!!errors.maxParticipants}
               helperText={errors.maxParticipants?.message}
             />

@@ -40,9 +40,9 @@ export function LeaderboardsPage() {
 
       {/* Prize Cards */}
       <Box>
-        <Typography variant="h5" fontWeight={700} mb={2}>
+        {/* <Typography variant="h5" fontWeight={700} mb={2}>
           Leaderboard Prizes
-        </Typography>
+        </Typography> */}
 
         {prizes.length === 0 ? (
           <Typography color="text.secondary">

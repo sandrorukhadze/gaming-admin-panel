@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Stack } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import { ConfirmModal } from '@/shared/ui/ConfirmModal';
 import { useDeleteLeaderboardPrize } from '../hooks/useDeleteLeaderboardPrize';
 import { LeaderboardPrizeCard } from './LeaderboardPrizeCard';
+import { CreatePrizeModal } from './CreatePrizeModal';
 import type { LeaderboardPrize } from '../model/leaderboard.types';
 
 interface LeaderboardPrizeCardListProps {
@@ -12,8 +14,8 @@ interface LeaderboardPrizeCardListProps {
 export function LeaderboardPrizeCardList({
   data,
 }: LeaderboardPrizeCardListProps) {
-  const [selectedPrize, setSelectedPrize] =
-    useState<LeaderboardPrize | null>(null);
+  const [selectedPrize, setSelectedPrize] = useState<LeaderboardPrize | null>(null);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   const { mutateAsync, isPending } = useDeleteLeaderboardPrize();
 
@@ -26,7 +28,9 @@ export function LeaderboardPrizeCardList({
   }
 
   async function handleConfirmDelete() {
-    if (!selectedPrize) return;
+    if (!selectedPrize) {
+      return;
+    }
 
     try {
       await mutateAsync(selectedPrize.id);
@@ -39,12 +43,31 @@ export function LeaderboardPrizeCardList({
     <>
       <Stack
         direction="row"
-        spacing={2}
-        flexWrap="wrap"
-        useFlexGap
+        justifyContent="space-between"
+        alignItems="center"
+        mb={2}
       >
+        <Typography variant="h5" fontWeight={700}>
+          Leaderboard Prizes
+        </Typography>
+
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => setIsCreateOpen(true)}
+        >
+          Add Prize
+        </Button>
+      </Stack>
+
+      <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
         {data.map((prize) => (
-          <Stack key={prize.id} sx={{ width: 300 }}>
+          <Stack
+            key={prize.id}
+            sx={{
+              width: 'calc((100% - 32px) / 3)',
+            }}
+          >
             <LeaderboardPrizeCard
               prize={prize}
               onDelete={handleOpenDelete}
@@ -52,6 +75,12 @@ export function LeaderboardPrizeCardList({
           </Stack>
         ))}
       </Stack>
+
+      <CreatePrizeModal
+        open={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+        existingPrizes={data}
+      />
 
       <ConfirmModal
         open={selectedPrize !== null}
