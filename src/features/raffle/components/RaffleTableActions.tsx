@@ -7,12 +7,14 @@ import type { Raffle } from '../model/raffle.types';
 interface RaffleTableActionsProps {
   row: Raffle;
   onView: (row: Raffle) => void;
+  onEdit: (row: Raffle) => void;
   onDelete: (row: Raffle) => void;
 }
 
 export function RaffleTableActions({
   row,
   onView,
+  onEdit,
   onDelete,
 }: RaffleTableActionsProps) {
   return (
@@ -26,13 +28,16 @@ export function RaffleTableActions({
         <VisibilityOutlinedIcon fontSize="small" />
       </IconButton>
 
-      <IconButton
-        size="small"
-        color="secondary"
-        aria-label={`Edit ${row.name}`}
-      >
-        <EditOutlinedIcon fontSize="small" />
-      </IconButton>
+      {row.status !== 'drawn' ? (
+        <IconButton
+          size="small"
+          color="secondary"
+          aria-label={`Edit ${row.name}`}
+          onClick={() => onEdit(row)}
+        >
+          <EditOutlinedIcon fontSize="small" />
+        </IconButton>
+      ) : null}
 
       <IconButton
         size="small"

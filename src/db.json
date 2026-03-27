@@ -99,18 +99,18 @@
   ],
   "raffles": [
     {
-      "id": "r2",
-      "name": "VIP Bonus Draw",
-      "description": "Exclusive raffle for VIP players",
-      "startDate": "2026-04-01T00:00:00.000Z",
-      "endDate": "2026-04-10T23:59:59.000Z",
-      "drawDate": "2026-04-11T12:00:00.000Z",
-      "status": "draft",
-      "ticketPrice": 25,
-      "maxTicketsPerUser": 3,
-      "totalTicketLimit": null,
-      "createdAt": "2026-04-01T00:00:00.000Z",
-      "updatedAt": "2026-04-01T00:00:00.000Z"
+      "id": "3ab15938-3f9a-4687-9337-33da23d15cc2",
+      "name": "სანდრო99999",
+      "description": "დსადას",
+      "startDate": "2026-03-04T09:45:00.000Z",
+      "endDate": "2026-03-21T09:46:00.000Z",
+      "drawDate": "2026-03-30T09:46:00.000Z",
+      "status": "drawn",
+      "ticketPrice": 21321,
+      "maxTicketsPerUser": 1,
+      "totalTicketLimit": 321,
+      "createdAt": "2026-03-27T17:46:16.078Z",
+      "updatedAt": "2026-03-27T17:48:43.901Z"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

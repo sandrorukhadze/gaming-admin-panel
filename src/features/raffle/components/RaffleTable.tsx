@@ -1,42 +1,44 @@
-import { useMemo, useState } from 'react';
-import { Box, Chip, TablePagination, Typography, Stack } from '@mui/material';
-import { DataTable, type Column } from '@/shared/ui/DataTable';
-import { ConfirmModal } from '@/shared/ui/ConfirmModal';
-import type { Raffle } from '../model/raffle.types';
-import { RaffleTableToolbar } from './RaffleTableToolbar';
-import { RaffleTableActions } from './RaffleTableActions';
-import { ViewRaffleModal } from './ViewRaffleModal';
-import { useDeleteRaffle } from '../hooks/useDeleteRaffle';
+import { useMemo, useState } from "react";
+import { Box, Chip, TablePagination, Typography, Stack } from "@mui/material";
+import { DataTable, type Column } from "@/shared/ui/DataTable";
+import { ConfirmModal } from "@/shared/ui/ConfirmModal";
+import type { Raffle } from "../model/raffle.types";
+import { RaffleTableToolbar } from "./RaffleTableToolbar";
+import { RaffleTableActions } from "./RaffleTableActions";
+import { ViewRaffleModal } from "./ViewRaffleModal";
+import { useDeleteRaffle } from "../hooks/useDeleteRaffle";
+import { CreateRaffleModal } from "./CreateRaffleModal";
+import { EditRaffleModal } from "./EditRaffleModal";
 
 interface RaffleTableProps {
   data: Raffle[];
 }
 
-type StatusFilter = 'all' | Raffle['status'];
-type Order = 'asc' | 'desc';
+type StatusFilter = "all" | Raffle["status"];
+type Order = "asc" | "desc";
 
 function getStatusColor(
-  status: Raffle['status']
-): 'default' | 'success' | 'warning' | 'error' {
-  if (status === 'active') {
-    return 'success';
+  status: Raffle["status"],
+): "default" | "success" | "warning" | "error" {
+  if (status === "active") {
+    return "success";
   }
 
-  if (status === 'draft') {
-    return 'warning';
+  if (status === "draft") {
+    return "warning";
   }
 
-  if (status === 'cancelled') {
-    return 'error';
+  if (status === "cancelled") {
+    return "error";
   }
 
-  return 'default';
+  return "default";
 }
 
 function isWithinDateRange(
   raffleDate: string,
   startDateFilter: string,
-  endDateFilter: string
+  endDateFilter: string,
 ): boolean {
   const raffleTime = new Date(raffleDate).getTime();
 
@@ -60,26 +62,36 @@ function isWithinDateRange(
 }
 
 export function RaffleTable({ data }: RaffleTableProps) {
-  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
-  const [startDateFilter, setStartDateFilter] = useState<string>('');
-  const [endDateFilter, setEndDateFilter] = useState<string>('');
-  const [orderBy, setOrderBy] = useState<string>('name');
-  const [order, setOrder] = useState<Order>('asc');
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+  const [startDateFilter, setStartDateFilter] = useState<string>("");
+  const [endDateFilter, setEndDateFilter] = useState<string>("");
+  const [orderBy, setOrderBy] = useState<string>("name");
+  const [order, setOrder] = useState<Order>("asc");
   const [page, setPage] = useState<number>(0);
   const [viewId, setViewId] = useState<string | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
-  const [deleteName, setDeleteName] = useState<string>('');
+  const [deleteName, setDeleteName] = useState<string>("");
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [editItem, setEditItem] = useState<Raffle | null>(null);
 
-  const rowsPerPage = 5;
+  const rowsPerPage = 3;
 
   const { mutateAsync: deleteRaffle, isPending: isDeletePending } =
     useDeleteRaffle();
 
   function handleSort(key: string) {
-    const isAsc = orderBy === key && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === key && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(key);
     setPage(0);
+  }
+
+  function handleOpenEdit(row: Raffle) {
+    setEditItem(row);
+  }
+
+  function handleCloseEdit() {
+    setEditItem(null);
   }
 
   function handleOpenView(row: Raffle) {
@@ -97,7 +109,7 @@ export function RaffleTable({ data }: RaffleTableProps) {
 
   function handleCloseDelete() {
     setDeleteId(null);
-    setDeleteName('');
+    setDeleteName("");
   }
 
   async function handleConfirmDelete() {
@@ -115,12 +127,12 @@ export function RaffleTable({ data }: RaffleTableProps) {
   const filteredData = useMemo(() => {
     return data.filter((raffle) => {
       const matchesStatus =
-        statusFilter === 'all' || raffle.status === statusFilter;
+        statusFilter === "all" || raffle.status === statusFilter;
 
       const matchesDateRange = isWithinDateRange(
         raffle.drawDate,
         startDateFilter,
-        endDateFilter
+        endDateFilter,
       );
 
       return matchesStatus && matchesDateRange;
@@ -133,39 +145,39 @@ export function RaffleTable({ data }: RaffleTableProps) {
     sorted.sort((a, b) => {
       let result = 0;
 
-      if (orderBy === 'name') {
+      if (orderBy === "name") {
         result = a.name.localeCompare(b.name);
       }
 
-      if (orderBy === 'ticketPrice') {
+      if (orderBy === "ticketPrice") {
         result = a.ticketPrice - b.ticketPrice;
       }
 
-      if (orderBy === 'maxTicketsPerUser') {
+      if (orderBy === "maxTicketsPerUser") {
         result = a.maxTicketsPerUser - b.maxTicketsPerUser;
       }
 
-      if (orderBy === 'totalTicketLimit') {
+      if (orderBy === "totalTicketLimit") {
         const aValue = a.totalTicketLimit ?? Number.MAX_SAFE_INTEGER;
         const bValue = b.totalTicketLimit ?? Number.MAX_SAFE_INTEGER;
         result = aValue - bValue;
       }
 
-      if (orderBy === 'startDate') {
+      if (orderBy === "startDate") {
         result =
           new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
       }
 
-      if (orderBy === 'endDate') {
+      if (orderBy === "endDate") {
         result = new Date(a.endDate).getTime() - new Date(b.endDate).getTime();
       }
 
-      if (orderBy === 'drawDate') {
+      if (orderBy === "drawDate") {
         result =
           new Date(a.drawDate).getTime() - new Date(b.drawDate).getTime();
       }
 
-      return order === 'asc' ? result : -result;
+      return order === "asc" ? result : -result;
     });
 
     return sorted;
@@ -178,8 +190,8 @@ export function RaffleTable({ data }: RaffleTableProps) {
 
   const columns: Column<Raffle>[] = [
     {
-      key: 'name',
-      title: 'Name',
+      key: "name",
+      title: "Name",
       sortable: true,
       render: (row) => (
         <Stack spacing={0.5}>
@@ -191,61 +203,62 @@ export function RaffleTable({ data }: RaffleTableProps) {
       ),
     },
     {
-      key: 'status',
-      title: 'Status',
+      key: "status",
+      title: "Status",
       render: (row) => (
         <Chip
           label={row.status}
           color={getStatusColor(row.status)}
           size="small"
-          sx={{ textTransform: 'capitalize' }}
+          sx={{ textTransform: "capitalize" }}
         />
       ),
     },
     {
-      key: 'ticketPrice',
-      title: 'Ticket Price',
+      key: "ticketPrice",
+      title: "Ticket Price",
       sortable: true,
       render: (row) => row.ticketPrice,
     },
     {
-      key: 'maxTicketsPerUser',
-      title: 'Max / User',
+      key: "maxTicketsPerUser",
+      title: "Max / User",
       sortable: true,
       render: (row) => row.maxTicketsPerUser,
     },
     {
-      key: 'totalTicketLimit',
-      title: 'Total Limit',
+      key: "totalTicketLimit",
+      title: "Total Limit",
       sortable: true,
-      render: (row) => row.totalTicketLimit ?? 'Unlimited',
+      render: (row) => row.totalTicketLimit ?? "Unlimited",
     },
     {
-      key: 'startDate',
-      title: 'Start Date',
+      key: "startDate",
+      title: "Start Date",
       sortable: true,
       render: (row) => new Date(row.startDate).toLocaleDateString(),
     },
     {
-      key: 'endDate',
-      title: 'End Date',
+      key: "endDate",
+      title: "End Date",
       sortable: true,
       render: (row) => new Date(row.endDate).toLocaleDateString(),
     },
     {
-      key: 'drawDate',
-      title: 'Draw Date',
+      key: "drawDate",
+      title: "Draw Date",
       sortable: true,
       render: (row) => new Date(row.drawDate).toLocaleDateString(),
     },
     {
-      key: 'actions',
-      title: 'Actions',
+      key: "actions",
+      title: "Actions",
       render: (row) => (
         <RaffleTableActions
           row={row}
           onView={handleOpenView}
           onDelete={handleOpenDelete}
+          onEdit={handleOpenEdit}
         />
       ),
     },
@@ -261,6 +274,7 @@ export function RaffleTable({ data }: RaffleTableProps) {
         statusFilter={statusFilter}
         startDateFilter={startDateFilter}
         endDateFilter={endDateFilter}
+        onAdd={() => setIsCreateOpen(true)}
         onStatusChange={(value) => {
           setStatusFilter(value);
           setPage(0);
@@ -315,6 +329,17 @@ export function RaffleTable({ data }: RaffleTableProps) {
         onConfirm={handleConfirmDelete}
         onCancel={handleCloseDelete}
         loading={isDeletePending}
+      />
+
+      <CreateRaffleModal
+        open={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+      />
+
+      <EditRaffleModal
+        open={editItem !== null}
+        onClose={handleCloseEdit}
+        raffle={editItem}
       />
     </>
   );
