@@ -1,23 +1,23 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const createRaffleSchema = z
   .object({
     name: z
       .string()
-      .min(3, 'Name must be at least 3 characters')
-      .max(80, 'Name must be at most 80 characters'),
-    description: z.string().min(1, 'Description is required'),
-    startDate: z.string().min(1, 'Start date is required'),
-    endDate: z.string().min(1, 'End date is required'),
-    drawDate: z.string().min(1, 'Draw date is required'),
-    status: z.enum(['draft', 'active', 'drawn', 'cancelled']),
+      .min(3, "Name must be at least 3 characters")
+      .max(80, "Name must be at most 80 characters"),
+    description: z.string().min(1, "Description is required"),
+    startDate: z.string().min(1, "Start date is required"),
+    endDate: z.string().min(1, "End date is required"),
+    drawDate: z.string().min(1, "Draw date is required"),
+    status: z.enum(["draft", "active", "drawn", "cancelled"]),
     ticketPrice: z.coerce
       .number()
-      .positive('Ticket price must be a positive number'),
+      .positive("Ticket price must be a positive number"),
     maxTicketsPerUser: z.coerce
       .number()
-      .int('Max tickets per user must be an integer')
-      .min(1, 'Max tickets per user must be at least 1'),
+      .int("Max tickets per user must be an integer")
+      .min(1, "Max tickets per user must be at least 1"),
     totalTicketLimit: z.union([z.coerce.number().int().positive(), z.null()]),
   })
   .superRefine((data, ctx) => {
@@ -28,16 +28,16 @@ export const createRaffleSchema = z
     if (end <= start) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        path: ['endDate'],
-        message: 'End date must be after start date',
+        path: ["endDate"],
+        message: "End date must be after start date",
       });
     }
 
     if (draw <= end) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        path: ['drawDate'],
-        message: 'Draw date must be after end date',
+        path: ["drawDate"],
+        message: "Draw date must be after end date",
       });
     }
   });

@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import { ConfirmModal } from '@/shared/ui/ConfirmModal';
-import { RafflePrizeCard } from './RafflePrizeCard';
 import { useDeleteRafflePrize } from '../hooks/useDeleteRafflePrize';
-import type { RafflePrize } from '../model/raffle.types';
+import { RafflePrizeCard } from './RafflePrizeCard';
+import { CreateRafflePrizeModal } from './CreateRafflePrizeModal';
+import type { RafflePrize } from '../model/raffle-prize.types';
 
 interface RafflePrizeCardListProps {
   data: RafflePrize[];
@@ -11,6 +13,7 @@ interface RafflePrizeCardListProps {
 
 export function RafflePrizeCardList({ data }: RafflePrizeCardListProps) {
   const [selectedPrize, setSelectedPrize] = useState<RafflePrize | null>(null);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   const { mutateAsync, isPending } = useDeleteRafflePrize();
 
@@ -36,9 +39,24 @@ export function RafflePrizeCardList({ data }: RafflePrizeCardListProps) {
 
   return (
     <>
-      <Typography variant="h5" fontWeight={700} mb={2}>
-        Raffle Prizes
-      </Typography>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={2}
+      >
+        <Typography variant="h5" fontWeight={700}>
+          Raffle Prizes
+        </Typography>
+
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => setIsCreateOpen(true)}
+        >
+          Add Prize
+        </Button>
+      </Stack>
 
       {data.length === 0 ? (
         <Typography color="text.secondary">No information</Typography>
@@ -59,6 +77,12 @@ export function RafflePrizeCardList({ data }: RafflePrizeCardListProps) {
           ))}
         </Stack>
       )}
+
+      <CreateRafflePrizeModal
+        open={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+        existingPrizes={data}
+      />
 
       <ConfirmModal
         open={selectedPrize !== null}

@@ -5,7 +5,7 @@ export interface Raffle {
   startDate: string;
   endDate: string;
   drawDate: string;
-  status: 'draft' | 'active' | 'drawn' | 'cancelled';
+  status: "draft" | "active" | "drawn" | "cancelled";
   ticketPrice: number;
   maxTicketsPerUser: number;
   totalTicketLimit: number | null;
@@ -17,7 +17,7 @@ export interface RafflePrize {
   id: string;
   rank: number;
   name: string;
-  type: 'coins' | 'freeSpin' | 'bonus';
+  type: "coins" | "freeSpin" | "bonus";
   amount: number;
   imageUrl: string;
 }
