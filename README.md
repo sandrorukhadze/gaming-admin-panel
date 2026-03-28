@@ -60,14 +60,21 @@ wheel/
 
 ---
 
-## 4. Getting Started
+1. Install dependencies
 
-### 1. Install dependencies
-
-```bash
 npm install
 
+2. Start the development client
 
+npm run dev
+
+3. Start the mock API server (in a new terminal)
+
+npm run server
+
+----
+
+API Reference
 
 GET    /leaderboards
 GET    /leaderboards/:id
@@ -98,3 +105,23 @@ GET    /wheels/:id
 POST   /wheels
 PUT    /wheels/:id
 DELETE /wheels/:id
+
+
+🔹 1. Feature-based არქიტექტურა
+
+პროექტში არჩეულია feature-based სტრუქტურა (leaderboard, raffle, wheel), ნაცვლად layer-based (components, hooks, etc.).
+
+ეს გადაწყვეტილება მივიღე იმიტომ, რომ:
+თითოეული ფუნქციონალი არის იზოლირებული თავის მოდულში
+კოდის გაფართოება მარტივია (ახალი feature დამატება არ არღვევს არსებულს)
+მცირდება დამოკიდებულებები სხვადასხვა მოდულებს შორის
+თავიდან ავიცილეთ დიდი და რთულად სამართავი ფაილები
+
+მაგალითად, wheel feature-ში ერთად არის:
+
+API
+hooks
+form logic
+UI
+
+რაც მნიშვნელოვნად აუმჯობესებს კოდის ორგანიზებას.

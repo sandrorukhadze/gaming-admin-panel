@@ -1,198 +1,141 @@
 {
   "leaderboards": [
     {
-      "id": 2,
-      "title": "tedasd",
-      "description": "dsadsa",
-      "startDate": "2026-03-18T06:37:00.000Z",
-      "endDate": "2026-03-21T06:37:00.000Z",
-      "status": "draft",
-      "scoringType": "points",
-      "prizes": [],
-      "maxParticipants": 3,
-      "createdAt": "2026-03-27T06:37:53.797Z",
-      "updatedAt": "2026-03-27T06:37:53.797Z"
-    },
-    {
-      "id": 3,
-      "title": "32131",
-      "description": "32131dsada",
-      "startDate": "2026-03-08T22:38:00.000Z",
-      "endDate": "2026-03-12T22:38:00.000Z",
-      "status": "active",
-      "scoringType": "points",
-      "prizes": [],
-      "maxParticipants": 3,
-      "createdAt": "2026-03-27T06:38:05.887Z",
-      "updatedAt": "2026-03-27T07:31:53.580Z"
-    },
-    {
-      "id": 4,
-      "title": "32432",
-      "description": "43242",
-      "startDate": "2026-03-09T06:38:00.000Z",
-      "endDate": "2026-03-13T06:38:00.000Z",
+      "id": 1,
+      "title": "Weekly High Rollers",
+      "description": "Top players ranked by total wager amount during the week.",
+      "startDate": "2026-03-01T00:00:00.000Z",
+      "endDate": "2026-03-07T23:59:59.000Z",
       "status": "completed",
       "scoringType": "wagered",
       "prizes": [],
-      "maxParticipants": 4,
-      "createdAt": "2026-03-27T06:38:19.402Z",
-      "updatedAt": "2026-03-27T06:38:19.402Z"
+      "maxParticipants": 100,
+      "createdAt": "2026-02-28T10:00:00.000Z",
+      "updatedAt": "2026-03-08T00:00:00.000Z"
     },
     {
-      "id": 5,
-      "title": "ყტრყრტყ",
-      "description": "ყტრტ",
-      "startDate": "2026-03-12T06:42:00.000Z",
-      "endDate": "2026-03-20T06:42:00.000Z",
+      "id": 2,
+      "title": "Daily Points Challenge",
+      "description": "Earn points by playing games daily and climb the leaderboard.",
+      "startDate": "2026-03-20T00:00:00.000Z",
+      "endDate": "2026-03-21T23:59:59.000Z",
       "status": "active",
       "scoringType": "points",
       "prizes": [],
-      "maxParticipants": 5,
-      "createdAt": "2026-03-27T06:42:43.204Z",
-      "updatedAt": "2026-03-27T06:42:43.204Z"
-    },
-    {
-      "id": 6,
-      "title": "უყტუტ",
-      "description": "უყტუტ",
-      "startDate": "2026-03-10T06:42:00.000Z",
-      "endDate": "2026-03-21T06:42:00.000Z",
-      "status": "active",
-      "scoringType": "wagered",
-      "prizes": [],
-      "maxParticipants": 6,
-      "createdAt": "2026-03-27T06:43:01.675Z",
-      "updatedAt": "2026-03-27T06:43:01.675Z"
-    },
-    {
-      "id": 7,
-      "title": "7677",
-      "description": "7676",
-      "startDate": "2026-03-13T16:34:00.000Z",
-      "endDate": "2026-03-20T16:34:00.000Z",
-      "status": "draft",
-      "scoringType": "points",
-      "prizes": [],
-      "maxParticipants": 6,
-      "createdAt": "2026-03-27T16:34:56.248Z",
-      "updatedAt": "2026-03-27T16:34:56.248Z"
-    },
-    {
-      "id": 8,
-      "title": "7687",
-      "description": "6767",
-      "startDate": "2026-03-12T12:31:00.000Z",
-      "endDate": "2026-03-21T12:31:00.000Z",
-      "status": "draft",
-      "scoringType": "points",
-      "prizes": [],
-      "maxParticipants": 6,
-      "createdAt": "2026-03-28T12:31:45.197Z",
-      "updatedAt": "2026-03-28T12:31:45.197Z"
+      "maxParticipants": 50,
+      "createdAt": "2026-03-19T12:00:00.000Z",
+      "updatedAt": "2026-03-20T00:00:00.000Z"
     }
   ],
+
   "leaderboardPrizes": [
     {
-      "id": "f5bf1b87-4996-445e-b0c1-ea19fa1ad774",
+      "id": "p1",
       "rank": 1,
-      "name": "Free Spiner",
+      "name": "Grand Prize",
       "type": "coins",
-      "amount": 10,
-      "imageUrl": "https://th.bing.com/th/id/OIP.95hu4jseooNDi4tURYGW_QHaE1?w=257&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
+      "amount": 1000,
+      "imageUrl": "https://example.com/images/gold.png"
     },
     {
-      "id": "a5ebea34-ae27-4651-9079-24317b305737",
-      "rank": 4,
-      "name": "სანდრო",
+      "id": "p2",
+      "rank": 2,
+      "name": "Second Place Reward",
       "type": "coins",
-      "amount": 76,
-      "imageUrl": "https://th.bing.com/th/id/OIP.95hu4jseooNDi4tURYGW_QHaE1?w=257&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
+      "amount": 500,
+      "imageUrl": "https://example.com/images/silver.png"
+    },
+    {
+      "id": "p3",
+      "rank": 3,
+      "name": "Third Place Reward",
+      "type": "coins",
+      "amount": 250,
+      "imageUrl": "https://example.com/images/bronze.png"
     }
   ],
+
   "raffles": [
     {
-      "id": "3ab15938-3f9a-4687-9337-33da23d15cc2",
-      "name": "სანდრო99999",
-      "description": "დსადას",
-      "startDate": "2026-03-04T09:45:00.000Z",
-      "endDate": "2026-03-21T09:46:00.000Z",
-      "drawDate": "2026-03-30T09:46:00.000Z",
-      "status": "drawn",
-      "ticketPrice": 21321,
-      "maxTicketsPerUser": 1,
-      "totalTicketLimit": 321,
-      "createdAt": "2026-03-27T17:46:16.078Z",
-      "updatedAt": "2026-03-27T17:48:43.901Z"
+      "id": "r1",
+      "name": "March Mega Raffle",
+      "description": "Buy tickets for a chance to win big rewards this March.",
+      "startDate": "2026-03-01T00:00:00.000Z",
+      "endDate": "2026-03-31T23:59:59.000Z",
+      "drawDate": "2026-04-01T12:00:00.000Z",
+      "status": "active",
+      "ticketPrice": 100,
+      "maxTicketsPerUser": 10,
+      "totalTicketLimit": 1000,
+      "createdAt": "2026-03-01T09:00:00.000Z",
+      "updatedAt": "2026-03-01T09:00:00.000Z"
     },
     {
-      "id": "9a14256b-cdc4-45bc-ab7e-94cb0a47faa5",
-      "name": "სანდრო99999",
-      "description": "878",
-      "startDate": "2026-03-04T12:32:00.000Z",
-      "endDate": "2026-03-13T12:32:00.000Z",
-      "drawDate": "2026-03-21T12:32:00.000Z",
+      "id": "r2",
+      "name": "Weekend Lucky Draw",
+      "description": "Special weekend raffle with increased rewards.",
+      "startDate": "2026-03-26T00:00:00.000Z",
+      "endDate": "2026-03-28T23:59:59.000Z",
+      "drawDate": "2026-03-29T12:00:00.000Z",
       "status": "active",
-      "ticketPrice": 787,
-      "maxTicketsPerUser": 1,
-      "totalTicketLimit": 67,
-      "createdAt": "2026-03-28T12:32:10.263Z",
-      "updatedAt": "2026-03-28T12:32:10.263Z"
+      "ticketPrice": 50,
+      "maxTicketsPerUser": 5,
+      "totalTicketLimit": 500,
+      "createdAt": "2026-03-25T10:00:00.000Z",
+      "updatedAt": "2026-03-25T10:00:00.000Z"
+    },
+    {
+      "id": "r3",
+      "name": "New Users Raffle",
+      "description": "Exclusive raffle for newly registered users.",
+      "startDate": "2026-03-15T00:00:00.000Z",
+      "endDate": "2026-03-30T23:59:59.000Z",
+      "drawDate": "2026-03-31T15:00:00.000Z",
+      "status": "active",
+      "ticketPrice": 10,
+      "maxTicketsPerUser": 3,
+      "totalTicketLimit": 300,
+      "createdAt": "2026-03-14T08:00:00.000Z",
+      "updatedAt": "2026-03-14T08:00:00.000Z"
+    },
+    {
+      "id": "r4",
+      "name": "VIP Exclusive Raffle",
+      "description": "High-value raffle available only for VIP players.",
+      "startDate": "2026-03-10T00:00:00.000Z",
+      "endDate": "2026-03-20T23:59:59.000Z",
+      "drawDate": "2026-03-21T18:00:00.000Z",
+      "status": "completed",
+      "ticketPrice": 200,
+      "maxTicketsPerUser": 20,
+      "totalTicketLimit": 2000,
+      "createdAt": "2026-03-09T09:00:00.000Z",
+      "updatedAt": "2026-03-21T18:00:00.000Z"
     }
   ],
+
   "rafflePrizes": [
     {
-      "id": "59a36893-6fba-4fe8-b74b-831e4f8b5a35",
+      "id": "rp1",
       "rank": 1,
-      "name": "prize 1",
+      "name": "Jackpot Reward",
       "type": "coins",
-      "amount": 1,
-      "imageUrl": "https://th.bing.com/th/id/OIP.1zksle8EkTvWnVXbVo1jFwEsDD?w=261&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
+      "amount": 5000,
+      "imageUrl": "https://example.com/images/jackpot.png"
     }
   ],
+
   "wheels": [
     {
       "id": "w1",
-      "name": "Daily Spin",
-      "description": "Daily reward wheel",
+      "name": "Daily Reward Wheel",
+      "description": "Spin daily to win coins or bonuses.",
       "status": "active",
       "segments": [
-        {
-          "id": "s1",
-          "label": "10 Coins",
-          "color": "#f59e0b",
-          "weight": 20,
-          "prizeType": "coins",
-          "prizeAmount": 10,
-          "imageUrl": ""
-        },
-        {
-          "id": "s2",
-          "label": "Free Spin",
-          "color": "#3b82f6",
-          "weight": 20,
-          "prizeType": "freeSpin",
-          "prizeAmount": 1,
-          "imageUrl": ""
-        },
-        {
-          "id": "s3",
-          "label": "Nothing",
-          "color": "#94a3b8",
-          "weight": 30,
-          "prizeType": "nothing",
-          "prizeAmount": 0,
-          "imageUrl": ""
-        },
-        {
-          "id": "s4",
-          "label": "50 Bonus",
-          "color": "#10b981",
-          "weight": 30,
-          "prizeType": "bonus",
-          "prizeAmount": 50,
-          "imageUrl": ""
-        }
+        { "id": "s1", "label": "10 Coins", "color": "#f59e0b", "weight": 25, "prizeType": "coins", "prizeAmount": 10, "imageUrl": "" },
+        { "id": "s2", "label": "Free Spin", "color": "#3b82f6", "weight": 15, "prizeType": "freeSpin", "prizeAmount": 1, "imageUrl": "" },
+        { "id": "s3", "label": "No Win", "color": "#94a3b8", "weight": 40, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" },
+        { "id": "s4", "label": "50 Bonus", "color": "#10b981", "weight": 20, "prizeType": "bonus", "prizeAmount": 50, "imageUrl": "" }
       ],
       "maxSpinsPerUser": 3,
       "spinCost": 0,
@@ -201,38 +144,94 @@
       "createdAt": "2026-03-01T00:00:00.000Z",
       "updatedAt": "2026-03-01T00:00:00.000Z"
     },
+
     {
-      "id": "a62a3671-7474-4570-bdb8-d854a708432f",
-      "name": "სანდრო",
-      "description": "dsadas",
-      "status": "draft",
+      "id": "w2",
+      "name": "High Roller Wheel",
+      "description": "Premium wheel with higher rewards.",
+      "status": "active",
       "segments": [
-        {
-          "id": "4e53c333-6dfa-4c04-9c6c-b4b751c49fbe",
-          "label": "Coins",
-          "color": "#f59e0b",
-          "weight": 50,
-          "prizeType": "coins",
-          "prizeAmount": 10,
-          "imageUrl": ""
-        },
-        {
-          "id": "094764e7-40a3-4232-9eff-0c92ffd50765",
-          "label": "Nothing",
-          "color": "#94a3b8",
-          "weight": 50,
-          "prizeType": "nothing",
-          "prizeAmount": 0,
-          "imageUrl": ""
-        }
+        { "id": "s1", "label": "100 Coins", "color": "#f97316", "weight": 20, "prizeType": "coins", "prizeAmount": 100, "imageUrl": "" },
+        { "id": "s2", "label": "Bonus 200", "color": "#22c55e", "weight": 10, "prizeType": "bonus", "prizeAmount": 200, "imageUrl": "" },
+        { "id": "s3", "label": "Nothing", "color": "#64748b", "weight": 70, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" }
       ],
-      "maxSpinsPerUser": 1,
-      "spinCost": 21,
+      "maxSpinsPerUser": 2,
+      "spinCost": 50,
+      "backgroundColor": "#ffffff",
+      "borderColor": "#000000",
+      "createdAt": "2026-03-05T00:00:00.000Z",
+      "updatedAt": "2026-03-05T00:00:00.000Z"
+    },
+
+    {
+      "id": "w3",
+      "name": "Beginner Wheel",
+      "description": "Easy rewards for new players.",
+      "status": "active",
+      "segments": [
+        { "id": "s1", "label": "5 Coins", "color": "#fde047", "weight": 50, "prizeType": "coins", "prizeAmount": 5, "imageUrl": "" },
+        { "id": "s2", "label": "Nothing", "color": "#94a3b8", "weight": 50, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" }
+      ],
+      "maxSpinsPerUser": 5,
+      "spinCost": 0,
       "backgroundColor": "#ffffff",
       "borderColor": "#111827",
-      "createdAt": "2026-03-28T17:33:06.145Z",
-      "updatedAt": "2026-03-28T17:33:06.145Z"
+      "createdAt": "2026-03-10T00:00:00.000Z",
+      "updatedAt": "2026-03-10T00:00:00.000Z"
+    },
+
+    {
+      "id": "w4",
+      "name": "Weekend Bonus Wheel",
+      "description": "Special weekend-only rewards.",
+      "status": "inactive",
+      "segments": [
+        { "id": "s1", "label": "20 Coins", "color": "#fb7185", "weight": 40, "prizeType": "coins", "prizeAmount": 20, "imageUrl": "" },
+        { "id": "s2", "label": "Free Spin", "color": "#60a5fa", "weight": 30, "prizeType": "freeSpin", "prizeAmount": 1, "imageUrl": "" },
+        { "id": "s3", "label": "Nothing", "color": "#cbd5f5", "weight": 30, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" }
+      ],
+      "maxSpinsPerUser": 3,
+      "spinCost": 10,
+      "backgroundColor": "#ffffff",
+      "borderColor": "#111827",
+      "createdAt": "2026-03-15T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+
+    {
+      "id": "w5",
+      "name": "Jackpot Wheel",
+      "description": "Low chance, high reward wheel.",
+      "status": "active",
+      "segments": [
+        { "id": "s1", "label": "500 Coins", "color": "#eab308", "weight": 5, "prizeType": "coins", "prizeAmount": 500, "imageUrl": "" },
+        { "id": "s2", "label": "Nothing", "color": "#64748b", "weight": 95, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" }
+      ],
+      "maxSpinsPerUser": 1,
+      "spinCost": 100,
+      "backgroundColor": "#ffffff",
+      "borderColor": "#000000",
+      "createdAt": "2026-03-18T00:00:00.000Z",
+      "updatedAt": "2026-03-18T00:00:00.000Z"
+    },
+
+    {
+      "id": "w6",
+      "name": "Free Daily Mini Wheel",
+      "description": "Quick daily spin with small rewards.",
+      "status": "active",
+      "segments": [
+        { "id": "s1", "label": "2 Coins", "color": "#a3e635", "weight": 60, "prizeType": "coins", "prizeAmount": 2, "imageUrl": "" },
+        { "id": "s2", "label": "Nothing", "color": "#94a3b8", "weight": 40, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" }
+      ],
+      "maxSpinsPerUser": 1,
+      "spinCost": 0,
+      "backgroundColor": "#ffffff",
+      "borderColor": "#111827",
+      "createdAt": "2026-03-20T00:00:00.000Z",
+      "updatedAt": "2026-03-20T00:00:00.000Z"
     }
   ],
+
   "$schema": "./node_modules/json-server/schema.json"
 }
