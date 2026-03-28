@@ -1,15 +1,21 @@
-import { Paper, Typography } from '@mui/material';
+import { Alert, Box, CircularProgress } from "@mui/material";
+import { useWheels } from "../hooks/useWheels";
+import { WheelTable } from "../components/table/WheelTable";
 
-export function WheelPage() {
-  return (
-    <Paper sx={{ p: 3 }}>
-      <Typography variant="h5" mb={1}>
-        Wheel
-      </Typography>
+export function WheelsPage() {
+  const { data, isLoading, isError } = useWheels();
 
-      <Typography color="text.secondary">
-        Wheel management page
-      </Typography>
-    </Paper>
-  );
+  if (isLoading) {
+    return (
+      <Box display="flex" justifyContent="center" mt={4}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (isError || !data) {
+    return <Alert severity="error">Failed to load wheels</Alert>;
+  }
+
+  return <WheelTable data={data} />;
 }

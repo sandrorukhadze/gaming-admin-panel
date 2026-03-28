@@ -150,5 +150,89 @@
       "imageUrl": "https://th.bing.com/th/id/OIP.1zksle8EkTvWnVXbVo1jFwEsDD?w=261&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
     }
   ],
+  "wheels": [
+    {
+      "id": "w1",
+      "name": "Daily Spin",
+      "description": "Daily reward wheel",
+      "status": "active",
+      "segments": [
+        {
+          "id": "s1",
+          "label": "10 Coins",
+          "color": "#f59e0b",
+          "weight": 20,
+          "prizeType": "coins",
+          "prizeAmount": 10,
+          "imageUrl": ""
+        },
+        {
+          "id": "s2",
+          "label": "Free Spin",
+          "color": "#3b82f6",
+          "weight": 20,
+          "prizeType": "freeSpin",
+          "prizeAmount": 1,
+          "imageUrl": ""
+        },
+        {
+          "id": "s3",
+          "label": "Nothing",
+          "color": "#94a3b8",
+          "weight": 30,
+          "prizeType": "nothing",
+          "prizeAmount": 0,
+          "imageUrl": ""
+        },
+        {
+          "id": "s4",
+          "label": "50 Bonus",
+          "color": "#10b981",
+          "weight": 30,
+          "prizeType": "bonus",
+          "prizeAmount": 50,
+          "imageUrl": ""
+        }
+      ],
+      "maxSpinsPerUser": 3,
+      "spinCost": 0,
+      "backgroundColor": "#ffffff",
+      "borderColor": "#111827",
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-01T00:00:00.000Z"
+    },
+    {
+      "id": "a62a3671-7474-4570-bdb8-d854a708432f",
+      "name": "სანდრო",
+      "description": "dsadas",
+      "status": "draft",
+      "segments": [
+        {
+          "id": "4e53c333-6dfa-4c04-9c6c-b4b751c49fbe",
+          "label": "Coins",
+          "color": "#f59e0b",
+          "weight": 50,
+          "prizeType": "coins",
+          "prizeAmount": 10,
+          "imageUrl": ""
+        },
+        {
+          "id": "094764e7-40a3-4232-9eff-0c92ffd50765",
+          "label": "Nothing",
+          "color": "#94a3b8",
+          "weight": 50,
+          "prizeType": "nothing",
+          "prizeAmount": 0,
+          "imageUrl": ""
+        }
+      ],
+      "maxSpinsPerUser": 1,
+      "spinCost": 21,
+      "backgroundColor": "#ffffff",
+      "borderColor": "#111827",
+      "createdAt": "2026-03-28T17:33:06.145Z",
+      "updatedAt": "2026-03-28T17:33:06.145Z"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

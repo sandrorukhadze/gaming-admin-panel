@@ -1,8 +1,8 @@
 import { Alert, Box, CircularProgress, Stack } from '@mui/material';
 import { useRaffles } from '../hooks/useRaffles';
 import { useRafflePrizes } from '../hooks/useRafflePrizes';
-import { RaffleTable } from '../components/RaffleTable';
 import { RafflePrizeCardList } from '../components/card/RafflePrizeCardList';
+import { RaffleTable } from '../components/table/RaffleTable';
 
 export function RafflesPage() {
   const {

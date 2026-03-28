@@ -1,35 +1,46 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { AdminLayout } from '@/app/layout/AdminLayout';
-import { LeaderboardsPage } from '@/features/leaderboard/pages/LeaderboardsPage';
-import { RafflesPage } from '@/features/raffle/pages/RafflesPage';
-import { WheelPage } from '@/features/wheel/pages/WheelPage';
-import { ROUTES } from '@/shared/constants/routes';
+import { createBrowserRouter } from "react-router-dom";
+import { AdminLayout } from "@/app/layout/AdminLayout";
+import { LeaderboardsPage } from "@/features/leaderboard/pages/LeaderboardsPage";
+import { RafflesPage } from "@/features/raffle/pages/RafflesPage";
+import { WheelsPage } from "@/features/wheel/pages/WheelPage";
+import { ROUTES } from "@/shared/constants/routes";
+import { NotFoundPage } from "@/pages/NotFoundPage"; // ✅ დაამატე ეს
+import { RouteErrorPage } from "@/pages/RouteErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: ROUTES.home,
     element: <AdminLayout />,
+    errorElement: <RouteErrorPage />, // ✅ აქ
     children: [
       {
         index: true,
         element: <LeaderboardsPage />,
-        handle: { breadcrumb: 'Leaderboards' },
+        handle: { breadcrumb: "Leaderboards" },
       },
       {
         path: ROUTES.leaderboards.slice(1),
         element: <LeaderboardsPage />,
-        handle: { breadcrumb: 'Leaderboards' },
+        handle: { breadcrumb: "Leaderboards" },
       },
       {
         path: ROUTES.raffles.slice(1),
         element: <RafflesPage />,
-        handle: { breadcrumb: 'Raffles' },
+        handle: { breadcrumb: "Raffles" },
       },
       {
         path: ROUTES.wheel.slice(1),
-        element: <WheelPage />,
-        handle: { breadcrumb: 'Wheel' },
+        element: <WheelsPage />,
+        handle: { breadcrumb: "Wheel" },
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
