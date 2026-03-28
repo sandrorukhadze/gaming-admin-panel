@@ -1,8 +1,8 @@
 import { Alert, Box, CircularProgress, Stack } from "@mui/material";
 import { useLeaderboards } from "../hooks/useLeaderboards";
 import { useLeaderboardPrizes } from "../hooks/useLeaderboardPrizes";
-import { LeaderboardTable } from "../components/LeaderboardTable";
-import { LeaderboardPrizeCardList } from "../components/LeaderboardPrizeCardList";
+import { LeaderboardTable } from "../components/table/LeaderboardTable";
+import { LeaderboardPrizeCardList } from "../components/card/LeaderboardPrizeCardList";
 
 export function LeaderboardsPage() {
   const {

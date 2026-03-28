@@ -12,9 +12,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { AppModal } from '@/shared/ui/AppModal';
 import { ConfirmModal } from '@/shared/ui/ConfirmModal';
-import { useCreateLeaderboardPrize } from '../hooks/useCreateLeaderboardPrize';
-import type { LeaderboardPrize } from '../model/leaderboard.types';
-import { createPrizeSchema, type CreatePrizeFormInput, type CreatePrizeFormValues } from '../model/leaderboard-prize.schema';
+import { useCreateLeaderboardPrize } from '../../hooks/useCreateLeaderboardPrize';
+import type { LeaderboardPrize } from '../../model/leaderboard.types';
+import { createPrizeSchema, type CreatePrizeFormInput, type CreatePrizeFormValues } from '../../model/leaderboard-prize.schema';
 
 
 interface CreatePrizeModalProps {

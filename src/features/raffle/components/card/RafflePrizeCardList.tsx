@@ -1,25 +1,23 @@
-import { useState } from 'react';
-import { Button, Stack, Typography } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import { ConfirmModal } from '@/shared/ui/ConfirmModal';
-import { useDeleteLeaderboardPrize } from '../hooks/useDeleteLeaderboardPrize';
-import { LeaderboardPrizeCard } from './LeaderboardPrizeCard';
-import { CreatePrizeModal } from './CreatePrizeModal';
-import type { LeaderboardPrize } from '../model/leaderboard.types';
+import { useState } from "react";
+import { Button, Stack, Typography } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { ConfirmModal } from "@/shared/ui/ConfirmModal";
+import { useDeleteRafflePrize } from "../../hooks/useDeleteRafflePrize";
+import { RafflePrizeCard } from "./RafflePrizeCard";
+import { CreateRafflePrizeModal } from "../modal/CreateRafflePrizeModal";
+import type { RafflePrize } from "../../model/raffle.types";
 
-interface LeaderboardPrizeCardListProps {
-  data: LeaderboardPrize[];
+interface RafflePrizeCardListProps {
+  data: RafflePrize[];
 }
 
-export function LeaderboardPrizeCardList({
-  data,
-}: LeaderboardPrizeCardListProps) {
-  const [selectedPrize, setSelectedPrize] = useState<LeaderboardPrize | null>(null);
+export function RafflePrizeCardList({ data }: RafflePrizeCardListProps) {
+  const [selectedPrize, setSelectedPrize] = useState<RafflePrize | null>(null);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
 
-  const { mutateAsync, isPending } = useDeleteLeaderboardPrize();
+  const { mutateAsync, isPending } = useDeleteRafflePrize();
 
-  function handleOpenDelete(prize: LeaderboardPrize) {
+  function handleOpenDelete(prize: RafflePrize) {
     setSelectedPrize(prize);
   }
 
@@ -48,7 +46,7 @@ export function LeaderboardPrizeCardList({
         mb={2}
       >
         <Typography variant="h5" fontWeight={700}>
-          Leaderboard Prizes
+          Raffle Prizes
         </Typography>
 
         <Button
@@ -68,19 +66,16 @@ export function LeaderboardPrizeCardList({
             <Stack
               key={prize.id}
               sx={{
-                width: 'calc((100% - 32px) / 3)',
+                width: "calc((100% - 32px) / 3)",
               }}
             >
-              <LeaderboardPrizeCard
-                prize={prize}
-                onDelete={handleOpenDelete}
-              />
+              <RafflePrizeCard prize={prize} onDelete={handleOpenDelete} />
             </Stack>
           ))}
         </Stack>
       )}
 
-      <CreatePrizeModal
+      <CreateRafflePrizeModal
         open={isCreateOpen}
         onClose={() => setIsCreateOpen(false)}
         existingPrizes={data}
@@ -89,7 +84,7 @@ export function LeaderboardPrizeCardList({
       <ConfirmModal
         open={selectedPrize !== null}
         title="Delete prize"
-        description={`Are you sure you want to delete "${selectedPrize?.name ?? ''}"?`}
+        description={`Are you sure you want to delete "${selectedPrize?.name ?? ""}"?`}
         confirmText="Delete"
         cancelText="Cancel"
         onConfirm={handleConfirmDelete}

@@ -8,15 +8,18 @@ import {
   Typography,
 } from '@mui/material';
 import { AppModal } from '@/shared/ui/AppModal';
-import { useLeaderboardById } from '../hooks/useLeaderboardById';
+import { useRaffleById } from '../../hooks/useRaffleById';
+import type { Raffle } from '../../model/raffle.types';
 
-interface ViewLeaderboardModalProps {
+interface ViewRaffleModalProps {
   open: boolean;
   onClose: () => void;
-  leaderboardId: number | null;
+  raffleId: string | null;
 }
 
-function getStatusColor(status: 'draft' | 'active' | 'completed') {
+function getStatusColor(
+  status: Raffle['status']
+): 'default' | 'success' | 'warning' | 'error' {
   if (status === 'active') {
     return 'success';
   }
@@ -25,30 +28,22 @@ function getStatusColor(status: 'draft' | 'active' | 'completed') {
     return 'warning';
   }
 
+  if (status === 'cancelled') {
+    return 'error';
+  }
+
   return 'default';
 }
 
-function getScoringColor(scoringType: 'points' | 'wins' | 'wagered') {
-  if (scoringType === 'points') {
-    return 'primary';
-  }
-
-  if (scoringType === 'wins') {
-    return 'secondary';
-  }
-
-  return 'info';
-}
-
-export function ViewLeaderboardModal({
+export function ViewRaffleModal({
   open,
   onClose,
-  leaderboardId,
-}: ViewLeaderboardModalProps) {
-  const { data, isLoading, isError } = useLeaderboardById(leaderboardId, open);
+  raffleId,
+}: ViewRaffleModalProps) {
+  const { data, isLoading, isError } = useRaffleById(raffleId, open);
 
   return (
-    <AppModal open={open} onClose={onClose} title="Leaderboard Details">
+    <AppModal open={open} onClose={onClose} title="Raffle Details">
       {isLoading ? (
         <Box display="flex" justifyContent="center" py={4}>
           <CircularProgress />
@@ -56,7 +51,7 @@ export function ViewLeaderboardModal({
       ) : null}
 
       {isError ? (
-        <Alert severity="error">Failed to load leaderboard</Alert>
+        <Alert severity="error">Failed to load raffle</Alert>
       ) : null}
 
       {!isLoading && !isError && data ? (
@@ -74,10 +69,10 @@ export function ViewLeaderboardModal({
 
           <Box>
             <Typography variant="caption" color="text.secondary">
-              Title
+              Name
             </Typography>
             <Typography variant="body1" fontWeight={600}>
-              {data.title}
+              {data.name}
             </Typography>
           </Box>
 
@@ -90,43 +85,55 @@ export function ViewLeaderboardModal({
             </Typography>
           </Box>
 
-          <Stack direction="row" spacing={2}>
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              Status
+            </Typography>
+            <Box mt={0.5}>
+              <Chip
+                label={data.status}
+                color={getStatusColor(data.status)}
+                size="small"
+                sx={{ textTransform: 'capitalize' }}
+              />
+            </Box>
+          </Box>
+
+          <Stack direction="row" spacing={3}>
             <Box>
               <Typography variant="caption" color="text.secondary">
-                Status
+                Ticket Price
               </Typography>
-              <Box mt={0.5}>
-                <Chip
-                  label={data.status}
-                  color={getStatusColor(data.status)}
-                  size="small"
-                  sx={{ textTransform: 'capitalize' }}
-                />
-              </Box>
+              <Typography variant="body1" fontWeight={600}>
+                {data.ticketPrice}
+              </Typography>
             </Box>
 
             <Box>
               <Typography variant="caption" color="text.secondary">
-                Scoring Type
+                Max Tickets Per User
               </Typography>
-              <Box mt={0.5}>
-                <Chip
-                  label={data.scoringType}
-                  color={getScoringColor(data.scoringType)}
-                  size="small"
-                  variant="outlined"
-                  sx={{ textTransform: 'capitalize' }}
-                />
-              </Box>
+              <Typography variant="body1" fontWeight={600}>
+                {data.maxTicketsPerUser}
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography variant="caption" color="text.secondary">
+                Total Ticket Limit
+              </Typography>
+              <Typography variant="body1" fontWeight={600}>
+                {data.totalTicketLimit ?? 'Unlimited'}
+              </Typography>
             </Box>
           </Stack>
 
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={3}>
             <Box>
               <Typography variant="caption" color="text.secondary">
                 Start Date
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="body2">
                 {new Date(data.startDate).toLocaleString()}
               </Typography>
             </Box>
@@ -135,22 +142,22 @@ export function ViewLeaderboardModal({
               <Typography variant="caption" color="text.secondary">
                 End Date
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="body2">
                 {new Date(data.endDate).toLocaleString()}
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography variant="caption" color="text.secondary">
+                Draw Date
+              </Typography>
+              <Typography variant="body2">
+                {new Date(data.drawDate).toLocaleString()}
               </Typography>
             </Box>
           </Stack>
 
-          <Box>
-            <Typography variant="caption" color="text.secondary">
-              Max Participants
-            </Typography>
-            <Typography variant="body1" fontWeight={600}>
-              {data.maxParticipants}
-            </Typography>
-          </Box>
-
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={3}>
             <Box>
               <Typography variant="caption" color="text.secondary">
                 Created At

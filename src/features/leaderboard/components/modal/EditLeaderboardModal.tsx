@@ -1,31 +1,21 @@
-import { useEffect, useMemo, useState } from "react";
-import {
-  Alert,
-  Box,
-  Button,
-  MenuItem,
-  Snackbar,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { useEffect, useState } from "react";
+import { Box, Button, MenuItem, Stack, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AppModal } from "@/shared/ui/AppModal";
-
+import { ConfirmModal } from "@/shared/ui/ConfirmModal";
+import { useUpdateLeaderboard } from "../../hooks/useUpdateLeaderboard";
 import {
   createLeaderboardSchema,
   type CreateLeaderboardFormInput,
   type CreateLeaderboardFormValues,
-} from "../model/leaderboard.schema";
-import type { Leaderboard } from "../model/leaderboard.types";
-import { ConfirmModal } from "@/shared/ui/ConfirmModal";
-import { useCreateLeaderboard } from "../hooks/useCreateLeaderboard";
-import { getNextId } from "@/shared/lib/getNextId";
+} from "../../model/leaderboard.schema";
+import type { Leaderboard } from "../../model/leaderboard.types";
 
-interface CreateLeaderboardModalProps {
+interface EditLeaderboardModalProps {
   open: boolean;
   onClose: () => void;
-  existingLeaderboards: Leaderboard[];
+  leaderboard: Leaderboard | null;
 }
 
 function getDefaultValues(): CreateLeaderboardFormInput {
@@ -40,37 +30,43 @@ function getDefaultValues(): CreateLeaderboardFormInput {
   };
 }
 
-export function CreateLeaderboardModal({
+export function EditLeaderboardModal({
   open,
   onClose,
-  existingLeaderboards,
-}: CreateLeaderboardModalProps) {
-  const [toast, setToast] = useState({
-    open: false,
-    message: "",
-    severity: "success" as "success" | "error",
-  });
+  leaderboard,
+}: EditLeaderboardModalProps) {
+  const { mutateAsync, isPending } = useUpdateLeaderboard();
+
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isDirty, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<CreateLeaderboardFormInput, unknown, CreateLeaderboardFormValues>(
     {
       resolver: zodResolver(createLeaderboardSchema),
-      defaultValues: useMemo(() => getDefaultValues(), []),
+      defaultValues: getDefaultValues(),
     },
   );
 
-  const { mutateAsync, isPending } = useCreateLeaderboard();
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-
   useEffect(() => {
-    if (!open) {
+    if (!leaderboard) {
       reset(getDefaultValues());
+      return;
     }
-  }, [open, reset]);
+
+    reset({
+      title: leaderboard.title,
+      description: leaderboard.description,
+      startDate: leaderboard.startDate.slice(0, 16),
+      endDate: leaderboard.endDate.slice(0, 16),
+      status: leaderboard.status,
+      scoringType: leaderboard.scoringType,
+      maxParticipants: leaderboard.maxParticipants,
+    });
+  }, [leaderboard, reset]);
 
   function handleClose() {
     if (isDirty) {
@@ -78,52 +74,12 @@ export function CreateLeaderboardModal({
       return;
     }
 
-    reset(getDefaultValues());
     onClose();
   }
 
-  async function onSubmit(values: CreateLeaderboardFormValues) {
-    const now = new Date().toISOString();
-
-    const newId = getNextId(existingLeaderboards);
-
-    const payload: Leaderboard = {
-      id: newId,
-      title: values.title,
-      description: values.description,
-      startDate: new Date(values.startDate).toISOString(),
-      endDate: new Date(values.endDate).toISOString(),
-      status: values.status,
-      scoringType: values.scoringType,
-      prizes: [],
-      maxParticipants: values.maxParticipants,
-      createdAt: now,
-      updatedAt: now,
-    };
-
-    try {
-      await mutateAsync(payload);
-
-      setToast({
-        open: true,
-        message: "Created successfully",
-        severity: "success",
-      });
-
-      reset(getDefaultValues());
-      onClose();
-    } catch {
-      setToast({
-        open: true,
-        message: "Error creating leaderboard",
-        severity: "error",
-      });
-    }
-  }
-
   function handleConfirmClose() {
-    setIsConfirmOpen(false);
     reset(getDefaultValues());
+    setIsConfirmOpen(false);
     onClose();
   }
 
@@ -131,9 +87,35 @@ export function CreateLeaderboardModal({
     setIsConfirmOpen(false);
   }
 
+  async function onSubmit(values: CreateLeaderboardFormValues) {
+    if (!leaderboard) {
+      return;
+    }
+
+    const payload: Leaderboard = {
+      ...leaderboard,
+      title: values.title,
+      description: values.description,
+      startDate: new Date(values.startDate).toISOString(),
+      endDate: new Date(values.endDate).toISOString(),
+      status: values.status,
+      scoringType: values.scoringType,
+      maxParticipants: values.maxParticipants,
+      updatedAt: new Date().toISOString(),
+    };
+
+    await mutateAsync({
+      id: leaderboard.id,
+      payload,
+    });
+
+    reset(getDefaultValues());
+    onClose();
+  }
+
   return (
     <>
-      <AppModal open={open} onClose={handleClose} title="Create Leaderboard">
+      <AppModal open={open} onClose={handleClose} title="Edit Leaderboard">
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={2}>
             <TextField
@@ -203,13 +185,17 @@ export function CreateLeaderboardModal({
               helperText={errors.maxParticipants?.message}
             />
 
-            <Stack direction="row" justifyContent="flex-end">
+            <Stack direction="row" justifyContent="flex-end" spacing={1}>
+              <Button variant="outlined" onClick={handleClose}>
+                Cancel
+              </Button>
+
               <Button
                 type="submit"
                 variant="contained"
                 disabled={isSubmitting || isPending}
               >
-                Create
+                Save
               </Button>
             </Stack>
           </Stack>
@@ -220,19 +206,11 @@ export function CreateLeaderboardModal({
         open={isConfirmOpen}
         title="Discard changes?"
         description="You have unsaved changes. Are you sure you want to leave?"
-        confirmText="Discard"
+        confirmText="Leave"
         cancelText="Stay"
         onConfirm={handleConfirmClose}
         onCancel={handleCancelClose}
       />
-
-      <Snackbar
-        open={toast.open}
-        autoHideDuration={3000}
-        onClose={() => setToast((prev) => ({ ...prev, open: false }))}
-      >
-        <Alert severity={toast.severity}>{toast.message}</Alert>
-      </Snackbar>
     </>
   );
 }

@@ -2,7 +2,7 @@ import { Alert, Box, CircularProgress, Stack } from '@mui/material';
 import { useRaffles } from '../hooks/useRaffles';
 import { useRafflePrizes } from '../hooks/useRafflePrizes';
 import { RaffleTable } from '../components/RaffleTable';
-import { RafflePrizeCardList } from '../components/RafflePrizeCardList';
+import { RafflePrizeCardList } from '../components/card/RafflePrizeCardList';
 
 export function RafflesPage() {
   const {

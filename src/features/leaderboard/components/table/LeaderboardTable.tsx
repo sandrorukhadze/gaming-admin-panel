@@ -1,14 +1,14 @@
 import { useMemo, useState } from "react";
 import { Chip, TablePagination, Typography, Stack } from "@mui/material";
-import type { Leaderboard } from "../model/leaderboard.types";
+import type { Leaderboard } from "../../model/leaderboard.types";
 import { DataTable, type Column } from "@/shared/ui/DataTable";
-import { CreateLeaderboardModal } from "./CreateLeaderboardModal";
+import { CreateLeaderboardModal } from "../modal/CreateLeaderboardModal";
 import { ConfirmModal } from "@/shared/ui/ConfirmModal";
-import { useDeleteLeaderboard } from "../hooks/useDeleteLeaderboard";
-import { LeaderboardTableToolbar } from "./LeaderboardTableToolbar";
+import { useDeleteLeaderboard } from "../../hooks/useDeleteLeaderboard";
+import { EditLeaderboardModal } from "../modal/EditLeaderboardModal";
+import { ViewLeaderboardModal } from "../modal/ViewLeaderboardModal";
 import { LeaderboardTableActions } from "./LeaderboardTableActions";
-import { EditLeaderboardModal } from "./EditLeaderboardModal";
-import { ViewLeaderboardModal } from "./ViewLeaderboardModal";
+import { LeaderboardTableToolbar } from "./LeaderboardTableToolbar";
 
 interface LeaderboardTableProps {
   data: Leaderboard[];

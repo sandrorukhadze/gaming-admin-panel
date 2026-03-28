@@ -2,13 +2,13 @@ import { useMemo, useState } from "react";
 import { Box, Chip, TablePagination, Typography, Stack } from "@mui/material";
 import { DataTable, type Column } from "@/shared/ui/DataTable";
 import { ConfirmModal } from "@/shared/ui/ConfirmModal";
-import type { Raffle } from "../model/raffle.types";
 import { RaffleTableToolbar } from "./RaffleTableToolbar";
 import { RaffleTableActions } from "./RaffleTableActions";
-import { ViewRaffleModal } from "./ViewRaffleModal";
-import { useDeleteRaffle } from "../hooks/useDeleteRaffle";
-import { CreateRaffleModal } from "./CreateRaffleModal";
-import { EditRaffleModal } from "./EditRaffleModal";
+import type { Raffle } from "../../model/raffle.types";
+import { useDeleteRaffle } from "../../hooks/useDeleteRaffle";
+import { ViewRaffleModal } from "../modal/ViewRaffleModal";
+import { CreateRaffleModal } from "../modal/CreateRaffleModal";
+import { EditRaffleModal } from "../modal/EditRaffleModal";
 
 interface RaffleTableProps {
   data: Raffle[];

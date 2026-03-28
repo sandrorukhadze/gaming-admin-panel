@@ -12,13 +12,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AppModal } from "@/shared/ui/AppModal";
 import { ConfirmModal } from "@/shared/ui/ConfirmModal";
-import { useCreateRafflePrize } from "../hooks/useCreateRafflePrize";
+import { useCreateRafflePrize } from "../../hooks/useCreateRafflePrize";
 import {
   createRafflePrizeSchema,
   type CreateRafflePrizeFormInput,
   type CreateRafflePrizeFormValues,
-} from "../model/raffle-prize.schema";
-import type { RafflePrize } from "../model/raffle.types";
+} from "../../model/raffle-prize.schema";
+import type { RafflePrize } from "../../model/raffle.types";
 
 interface CreateRafflePrizeModalProps {
   open: boolean;

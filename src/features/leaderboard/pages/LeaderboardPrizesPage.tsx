@@ -1,6 +1,6 @@
 import { Alert, Box, CircularProgress } from '@mui/material';
 import { useLeaderboardPrizes } from '../hooks/useLeaderboardPrizes';
-import { LeaderboardPrizeCardList } from '../components/LeaderboardPrizeCardList';
+import { LeaderboardPrizeCardList } from '../components/card/LeaderboardPrizeCardList';
 
 export function LeaderboardPrizesPage() {
   const { data, isLoading, isError } = useLeaderboardPrizes();

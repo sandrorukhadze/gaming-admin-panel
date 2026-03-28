@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
-import type { RafflePrize } from '../model/raffle.types';
+import type { RafflePrize } from '../../model/raffle.types';
 
 interface RafflePrizeCardProps {
   prize: RafflePrize;

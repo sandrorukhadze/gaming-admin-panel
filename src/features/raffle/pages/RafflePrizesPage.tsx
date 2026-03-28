@@ -1,6 +1,6 @@
 import { Alert, Box, CircularProgress } from '@mui/material';
 import { useRafflePrizes } from '../hooks/useRafflePrizes';
-import { RafflePrizeCardList } from '../components/RafflePrizeCardList';
+import { RafflePrizeCardList } from '../components/card/RafflePrizeCardList';
 
 export function RafflePrizesPage() {
   const { data, isLoading, isError } = useRafflePrizes();

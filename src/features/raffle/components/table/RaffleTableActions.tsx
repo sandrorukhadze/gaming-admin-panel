@@ -2,7 +2,7 @@ import { IconButton, Stack } from '@mui/material';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import type { Raffle } from '../model/raffle.types';
+import type { Raffle } from '../../model/raffle.types';
 
 interface RaffleTableActionsProps {
   row: Raffle;

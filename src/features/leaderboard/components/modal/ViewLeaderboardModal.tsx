@@ -8,18 +8,15 @@ import {
   Typography,
 } from '@mui/material';
 import { AppModal } from '@/shared/ui/AppModal';
-import { useRaffleById } from '../hooks/useRaffleById';
-import type { Raffle } from '../model/raffle.types';
+import { useLeaderboardById } from '../../hooks/useLeaderboardById';
 
-interface ViewRaffleModalProps {
+interface ViewLeaderboardModalProps {
   open: boolean;
   onClose: () => void;
-  raffleId: string | null;
+  leaderboardId: number | null;
 }
 
-function getStatusColor(
-  status: Raffle['status']
-): 'default' | 'success' | 'warning' | 'error' {
+function getStatusColor(status: 'draft' | 'active' | 'completed') {
   if (status === 'active') {
     return 'success';
   }
@@ -28,22 +25,30 @@ function getStatusColor(
     return 'warning';
   }
 
-  if (status === 'cancelled') {
-    return 'error';
-  }
-
   return 'default';
 }
 
-export function ViewRaffleModal({
+function getScoringColor(scoringType: 'points' | 'wins' | 'wagered') {
+  if (scoringType === 'points') {
+    return 'primary';
+  }
+
+  if (scoringType === 'wins') {
+    return 'secondary';
+  }
+
+  return 'info';
+}
+
+export function ViewLeaderboardModal({
   open,
   onClose,
-  raffleId,
-}: ViewRaffleModalProps) {
-  const { data, isLoading, isError } = useRaffleById(raffleId, open);
+  leaderboardId,
+}: ViewLeaderboardModalProps) {
+  const { data, isLoading, isError } = useLeaderboardById(leaderboardId, open);
 
   return (
-    <AppModal open={open} onClose={onClose} title="Raffle Details">
+    <AppModal open={open} onClose={onClose} title="Leaderboard Details">
       {isLoading ? (
         <Box display="flex" justifyContent="center" py={4}>
           <CircularProgress />
@@ -51,7 +56,7 @@ export function ViewRaffleModal({
       ) : null}
 
       {isError ? (
-        <Alert severity="error">Failed to load raffle</Alert>
+        <Alert severity="error">Failed to load leaderboard</Alert>
       ) : null}
 
       {!isLoading && !isError && data ? (
@@ -69,10 +74,10 @@ export function ViewRaffleModal({
 
           <Box>
             <Typography variant="caption" color="text.secondary">
-              Name
+              Title
             </Typography>
             <Typography variant="body1" fontWeight={600}>
-              {data.name}
+              {data.title}
             </Typography>
           </Box>
 
@@ -85,55 +90,43 @@ export function ViewRaffleModal({
             </Typography>
           </Box>
 
-          <Box>
-            <Typography variant="caption" color="text.secondary">
-              Status
-            </Typography>
-            <Box mt={0.5}>
-              <Chip
-                label={data.status}
-                color={getStatusColor(data.status)}
-                size="small"
-                sx={{ textTransform: 'capitalize' }}
-              />
-            </Box>
-          </Box>
-
-          <Stack direction="row" spacing={3}>
+          <Stack direction="row" spacing={2}>
             <Box>
               <Typography variant="caption" color="text.secondary">
-                Ticket Price
+                Status
               </Typography>
-              <Typography variant="body1" fontWeight={600}>
-                {data.ticketPrice}
-              </Typography>
+              <Box mt={0.5}>
+                <Chip
+                  label={data.status}
+                  color={getStatusColor(data.status)}
+                  size="small"
+                  sx={{ textTransform: 'capitalize' }}
+                />
+              </Box>
             </Box>
 
             <Box>
               <Typography variant="caption" color="text.secondary">
-                Max Tickets Per User
+                Scoring Type
               </Typography>
-              <Typography variant="body1" fontWeight={600}>
-                {data.maxTicketsPerUser}
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="caption" color="text.secondary">
-                Total Ticket Limit
-              </Typography>
-              <Typography variant="body1" fontWeight={600}>
-                {data.totalTicketLimit ?? 'Unlimited'}
-              </Typography>
+              <Box mt={0.5}>
+                <Chip
+                  label={data.scoringType}
+                  color={getScoringColor(data.scoringType)}
+                  size="small"
+                  variant="outlined"
+                  sx={{ textTransform: 'capitalize' }}
+                />
+              </Box>
             </Box>
           </Stack>
 
-          <Stack direction="row" spacing={3}>
+          <Stack direction="row" spacing={2}>
             <Box>
               <Typography variant="caption" color="text.secondary">
                 Start Date
               </Typography>
-              <Typography variant="body2">
+              <Typography variant="body1">
                 {new Date(data.startDate).toLocaleString()}
               </Typography>
             </Box>
@@ -142,22 +135,22 @@ export function ViewRaffleModal({
               <Typography variant="caption" color="text.secondary">
                 End Date
               </Typography>
-              <Typography variant="body2">
+              <Typography variant="body1">
                 {new Date(data.endDate).toLocaleString()}
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="caption" color="text.secondary">
-                Draw Date
-              </Typography>
-              <Typography variant="body2">
-                {new Date(data.drawDate).toLocaleString()}
               </Typography>
             </Box>
           </Stack>
 
-          <Stack direction="row" spacing={3}>
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              Max Participants
+            </Typography>
+            <Typography variant="body1" fontWeight={600}>
+              {data.maxParticipants}
+            </Typography>
+          </Box>
+
+          <Stack direction="row" spacing={2}>
             <Box>
               <Typography variant="caption" color="text.secondary">
                 Created At

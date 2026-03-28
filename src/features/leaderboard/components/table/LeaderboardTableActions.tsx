@@ -2,7 +2,7 @@ import { IconButton, Stack } from "@mui/material";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import type { Leaderboard } from "../model/leaderboard.types";
+import type { Leaderboard } from "../../model/leaderboard.types";
 
 interface LeaderboardTableActionsProps {
   row: Leaderboard;

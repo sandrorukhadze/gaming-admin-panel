@@ -2,22 +2,24 @@ import { useState } from 'react';
 import { Button, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { ConfirmModal } from '@/shared/ui/ConfirmModal';
-import { useDeleteRafflePrize } from '../hooks/useDeleteRafflePrize';
-import { RafflePrizeCard } from './RafflePrizeCard';
-import { CreateRafflePrizeModal } from './CreateRafflePrizeModal';
-import type { RafflePrize } from '../model/raffle-prize.types';
+import { useDeleteLeaderboardPrize } from '../../hooks/useDeleteLeaderboardPrize';
+import { LeaderboardPrizeCard } from './LeaderboardPrizeCard';
+import { CreatePrizeModal } from '../modal/CreatePrizeModal';
+import type { LeaderboardPrize } from '../../model/leaderboard.types';
 
-interface RafflePrizeCardListProps {
-  data: RafflePrize[];
+interface LeaderboardPrizeCardListProps {
+  data: LeaderboardPrize[];
 }
 
-export function RafflePrizeCardList({ data }: RafflePrizeCardListProps) {
-  const [selectedPrize, setSelectedPrize] = useState<RafflePrize | null>(null);
+export function LeaderboardPrizeCardList({
+  data,
+}: LeaderboardPrizeCardListProps) {
+  const [selectedPrize, setSelectedPrize] = useState<LeaderboardPrize | null>(null);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
 
-  const { mutateAsync, isPending } = useDeleteRafflePrize();
+  const { mutateAsync, isPending } = useDeleteLeaderboardPrize();
 
-  function handleOpenDelete(prize: RafflePrize) {
+  function handleOpenDelete(prize: LeaderboardPrize) {
     setSelectedPrize(prize);
   }
 
@@ -46,7 +48,7 @@ export function RafflePrizeCardList({ data }: RafflePrizeCardListProps) {
         mb={2}
       >
         <Typography variant="h5" fontWeight={700}>
-          Raffle Prizes
+          Leaderboard Prizes
         </Typography>
 
         <Button
@@ -69,7 +71,7 @@ export function RafflePrizeCardList({ data }: RafflePrizeCardListProps) {
                 width: 'calc((100% - 32px) / 3)',
               }}
             >
-              <RafflePrizeCard
+              <LeaderboardPrizeCard
                 prize={prize}
                 onDelete={handleOpenDelete}
               />
@@ -78,7 +80,7 @@ export function RafflePrizeCardList({ data }: RafflePrizeCardListProps) {
         </Stack>
       )}
 
-      <CreateRafflePrizeModal
+      <CreatePrizeModal
         open={isCreateOpen}
         onClose={() => setIsCreateOpen(false)}
         existingPrizes={data}

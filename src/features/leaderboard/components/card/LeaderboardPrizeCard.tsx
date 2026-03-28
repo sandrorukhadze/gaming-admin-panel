@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EmojiEventsOutlinedIcon from "@mui/icons-material/EmojiEventsOutlined";
-import type { LeaderboardPrize } from "../model/leaderboard.types";
+import type { LeaderboardPrize } from "../../model/leaderboard.types";
 
 interface LeaderboardPrizeCardProps {
   prize: LeaderboardPrize;
