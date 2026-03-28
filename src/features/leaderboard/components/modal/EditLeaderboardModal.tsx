@@ -11,6 +11,7 @@ import {
   type CreateLeaderboardFormValues,
 } from "../../model/leaderboard.schema";
 import type { Leaderboard } from "../../model/leaderboard.types";
+import { useLeaderboardPrizes } from "../../hooks/useLeaderboardPrizes";
 
 interface EditLeaderboardModalProps {
   open: boolean;
@@ -26,6 +27,7 @@ function getDefaultValues(): CreateLeaderboardFormInput {
     endDate: "",
     status: "draft",
     scoringType: "points",
+    prizeId: "",
     maxParticipants: "" as unknown as number,
   };
 }
@@ -38,7 +40,7 @@ export function EditLeaderboardModal({
   const { mutateAsync, isPending } = useUpdateLeaderboard();
 
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-
+  const { data: prizes = [] } = useLeaderboardPrizes();
   const {
     register,
     handleSubmit,
@@ -64,6 +66,7 @@ export function EditLeaderboardModal({
       endDate: leaderboard.endDate.slice(0, 16),
       status: leaderboard.status,
       scoringType: leaderboard.scoringType,
+      prizeId: leaderboard.prizes[0]?.id ?? "",
       maxParticipants: leaderboard.maxParticipants,
     });
   }, [leaderboard, reset]);
@@ -92,6 +95,10 @@ export function EditLeaderboardModal({
       return;
     }
 
+    const selectedPrizes = prizes.filter(
+      (prize) => prize.id === values.prizeId,
+    );
+
     const payload: Leaderboard = {
       ...leaderboard,
       title: values.title,
@@ -100,6 +107,7 @@ export function EditLeaderboardModal({
       endDate: new Date(values.endDate).toISOString(),
       status: values.status,
       scoringType: values.scoringType,
+      prizes: selectedPrizes,
       maxParticipants: values.maxParticipants,
       updatedAt: new Date().toISOString(),
     };
@@ -175,6 +183,21 @@ export function EditLeaderboardModal({
               <MenuItem value="points">Points</MenuItem>
               <MenuItem value="wins">Wins</MenuItem>
               <MenuItem value="wagered">Wagered</MenuItem>
+            </TextField>
+
+            <TextField
+              select
+              label="Select Prize"
+              {...register("prizeId")}
+              error={!!errors.prizeId}
+              helperText={errors.prizeId?.message}
+            >
+              <MenuItem value="">Select prize</MenuItem>
+              {prizes.map((prize) => (
+                <MenuItem key={prize.id} value={prize.id}>
+                  {prize.name} (Rank {prize.rank})
+                </MenuItem>
+              ))}
             </TextField>
 
             <TextField

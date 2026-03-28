@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Alert,
   Box,
@@ -7,18 +7,19 @@ import {
   Snackbar,
   Stack,
   TextField,
-} from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AppModal } from '@/shared/ui/AppModal';
-import { ConfirmModal } from '@/shared/ui/ConfirmModal';
-import { useUpdateRaffle } from '../../hooks/useUpdateRaffle';
+} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AppModal } from "@/shared/ui/AppModal";
+import { ConfirmModal } from "@/shared/ui/ConfirmModal";
+import { useUpdateRaffle } from "../../hooks/useUpdateRaffle";
 import {
   createRaffleSchema,
   type CreateRaffleFormInput,
   type CreateRaffleFormValues,
-} from '../../model/raffle.schema';
-import type { Raffle } from '../../model/raffle.types';
+} from "../../model/raffle.schema";
+import type { Raffle } from "../../model/raffle.types";
+import { useRafflePrizes } from "../../hooks/useRafflePrizes";
 
 interface EditRaffleModalProps {
   open: boolean;
@@ -28,15 +29,16 @@ interface EditRaffleModalProps {
 
 function getDefaultValues(): CreateRaffleFormInput {
   return {
-    name: '',
-    description: '',
-    startDate: '',
-    endDate: '',
-    drawDate: '',
-    status: 'draft',
-    ticketPrice: '',
+    name: "",
+    description: "",
+    startDate: "",
+    endDate: "",
+    drawDate: "",
+    status: "draft",
+    ticketPrice: "",
     maxTicketsPerUser: 1,
     totalTicketLimit: null,
+    prizeId: "",
   };
 }
 
@@ -48,12 +50,12 @@ export function EditRaffleModal({
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [toast, setToast] = useState({
     open: false,
-    message: '',
-    severity: 'success' as 'success' | 'error',
+    message: "",
+    severity: "success" as "success" | "error",
   });
 
   const { mutateAsync, isPending } = useUpdateRaffle();
-
+  const { data: prizes = [] } = useRafflePrizes();
   const {
     register,
     handleSubmit,
@@ -80,6 +82,7 @@ export function EditRaffleModal({
       ticketPrice: raffle.ticketPrice,
       maxTicketsPerUser: raffle.maxTicketsPerUser,
       totalTicketLimit: raffle.totalTicketLimit,
+      prizeId: raffle.prizes[0]?.id ?? "",
     });
   }, [raffle, reset]);
 
@@ -108,6 +111,10 @@ export function EditRaffleModal({
       return;
     }
 
+    const selectedPrizes = prizes.filter(
+      (prize) => prize.id === values.prizeId,
+    );
+
     const payload: Raffle = {
       ...raffle,
       name: values.name,
@@ -118,6 +125,7 @@ export function EditRaffleModal({
       status: values.status,
       ticketPrice: values.ticketPrice,
       maxTicketsPerUser: values.maxTicketsPerUser,
+      prizes: selectedPrizes,
       totalTicketLimit: values.totalTicketLimit,
       updatedAt: new Date().toISOString(),
     };
@@ -130,8 +138,8 @@ export function EditRaffleModal({
 
       setToast({
         open: true,
-        message: 'Raffle updated successfully',
-        severity: 'success',
+        message: "Raffle updated successfully",
+        severity: "success",
       });
 
       reset(getDefaultValues());
@@ -139,8 +147,8 @@ export function EditRaffleModal({
     } catch {
       setToast({
         open: true,
-        message: 'Failed to update raffle',
-        severity: 'error',
+        message: "Failed to update raffle",
+        severity: "error",
       });
     }
   }
@@ -152,7 +160,7 @@ export function EditRaffleModal({
           <Stack spacing={2}>
             <TextField
               label="Name"
-              {...register('name')}
+              {...register("name")}
               error={!!errors.name}
               helperText={errors.name?.message}
             />
@@ -161,7 +169,7 @@ export function EditRaffleModal({
               label="Description"
               multiline
               minRows={3}
-              {...register('description')}
+              {...register("description")}
               error={!!errors.description}
               helperText={errors.description?.message}
             />
@@ -170,7 +178,7 @@ export function EditRaffleModal({
               label="Start Date"
               type="datetime-local"
               InputLabelProps={{ shrink: true }}
-              {...register('startDate')}
+              {...register("startDate")}
               error={!!errors.startDate}
               helperText={errors.startDate?.message}
             />
@@ -179,7 +187,7 @@ export function EditRaffleModal({
               label="End Date"
               type="datetime-local"
               InputLabelProps={{ shrink: true }}
-              {...register('endDate')}
+              {...register("endDate")}
               error={!!errors.endDate}
               helperText={errors.endDate?.message}
             />
@@ -188,7 +196,7 @@ export function EditRaffleModal({
               label="Draw Date"
               type="datetime-local"
               InputLabelProps={{ shrink: true }}
-              {...register('drawDate')}
+              {...register("drawDate")}
               error={!!errors.drawDate}
               helperText={errors.drawDate?.message}
             />
@@ -197,7 +205,7 @@ export function EditRaffleModal({
               select
               label="Status"
               defaultValue="draft"
-              {...register('status')}
+              {...register("status")}
               error={!!errors.status}
               helperText={errors.status?.message}
             >
@@ -208,9 +216,26 @@ export function EditRaffleModal({
             </TextField>
 
             <TextField
+              select
+              label="Select Prize"
+              defaultValue=""
+              {...register("prizeId")}
+              error={!!errors.prizeId}
+              helperText={errors.prizeId?.message}
+            >
+              <MenuItem value="">Select prize</MenuItem>
+
+              {prizes.map((prize) => (
+                <MenuItem key={prize.id} value={prize.id}>
+                  {prize.name} (Rank {prize.rank})
+                </MenuItem>
+              ))}
+            </TextField>
+
+            <TextField
               label="Ticket Price"
               type="number"
-              {...register('ticketPrice')}
+              {...register("ticketPrice")}
               error={!!errors.ticketPrice}
               helperText={errors.ticketPrice?.message}
             />
@@ -218,7 +243,7 @@ export function EditRaffleModal({
             <TextField
               label="Max Tickets Per User"
               type="number"
-              {...register('maxTicketsPerUser')}
+              {...register("maxTicketsPerUser")}
               error={!!errors.maxTicketsPerUser}
               helperText={errors.maxTicketsPerUser?.message}
             />
@@ -226,7 +251,7 @@ export function EditRaffleModal({
             <TextField
               label="Total Ticket Limit"
               type="number"
-              {...register('totalTicketLimit')}
+              {...register("totalTicketLimit")}
               helperText="Leave empty if unlimited"
             />
 
@@ -261,7 +286,7 @@ export function EditRaffleModal({
         open={toast.open}
         autoHideDuration={3000}
         onClose={() => setToast((prev) => ({ ...prev, open: false }))}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert
           severity={toast.severity}
