@@ -21,6 +21,7 @@ import type { Leaderboard } from "../../model/leaderboard.types";
 import { ConfirmModal } from "@/shared/ui/ConfirmModal";
 import { useCreateLeaderboard } from "../../hooks/useCreateLeaderboard";
 import { getNextId } from "@/shared/lib/getNextId";
+import { useLeaderboardPrizes } from "../../hooks/useLeaderboardPrizes";
 
 interface CreateLeaderboardModalProps {
   open: boolean;
@@ -36,6 +37,7 @@ function getDefaultValues(): CreateLeaderboardFormInput {
     endDate: "",
     status: "draft",
     scoringType: "points",
+    prizeId: "",
     maxParticipants: "" as unknown as number,
   };
 }
@@ -50,6 +52,8 @@ export function CreateLeaderboardModal({
     message: "",
     severity: "success" as "success" | "error",
   });
+
+  const { data: prizes = [] } = useLeaderboardPrizes();
 
   const {
     register,
@@ -95,7 +99,9 @@ export function CreateLeaderboardModal({
       endDate: new Date(values.endDate).toISOString(),
       status: values.status,
       scoringType: values.scoringType,
-      prizes: [],
+      prizes: values.prizeId
+        ? prizes.filter((p) => p.id === values.prizeId)
+        : [],
       maxParticipants: values.maxParticipants,
       createdAt: now,
       updatedAt: now,
@@ -193,6 +199,23 @@ export function CreateLeaderboardModal({
               <MenuItem value="points">Points</MenuItem>
               <MenuItem value="wins">Wins</MenuItem>
               <MenuItem value="wagered">Wagered</MenuItem>
+            </TextField>
+
+            <TextField
+              select
+              label="Select Prize"
+              defaultValue=""
+              {...register("prizeId")}
+              error={!!errors.prizeId}
+              helperText={errors.prizeId?.message}
+            >
+              <MenuItem value="">Select prize</MenuItem>
+
+              {prizes.map((prize) => (
+                <MenuItem key={prize.id} value={prize.id}>
+                  {prize.name} (Rank {prize.rank})
+                </MenuItem>
+              ))}
             </TextField>
 
             <TextField

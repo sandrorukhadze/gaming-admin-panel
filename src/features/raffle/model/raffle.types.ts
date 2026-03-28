@@ -8,6 +8,7 @@ export interface Raffle {
   status: "draft" | "active" | "drawn" | "cancelled";
   ticketPrice: number;
   maxTicketsPerUser: number;
+  prizes:RafflePrize[];
   totalTicketLimit: number | null;
   createdAt: string;
   updatedAt: string;

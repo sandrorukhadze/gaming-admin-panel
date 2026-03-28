@@ -19,6 +19,7 @@ export const createRaffleSchema = z
       .int("Max tickets per user must be an integer")
       .min(1, "Max tickets per user must be at least 1"),
     totalTicketLimit: z.union([z.coerce.number().int().positive(), z.null()]),
+    prizeId: z.string().min(1, "Prize is required"),
   })
   .superRefine((data, ctx) => {
     const start = new Date(data.startDate).getTime();

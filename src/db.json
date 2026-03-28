@@ -25,9 +25,30 @@
       "maxParticipants": 50,
       "createdAt": "2026-03-19T12:00:00.000Z",
       "updatedAt": "2026-03-20T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "title": "32131",
+      "description": "32131",
+      "startDate": "2026-03-12T19:03:00.000Z",
+      "endDate": "2026-03-26T19:03:00.000Z",
+      "status": "active",
+      "scoringType": "wins",
+      "prizes": [
+        {
+          "id": "p1",
+          "rank": 1,
+          "name": "Grand Prize",
+          "type": "coins",
+          "amount": 1000,
+          "imageUrl": "https://example.com/images/gold.png"
+        }
+      ],
+      "maxParticipants": 123,
+      "createdAt": "2026-03-28T19:03:37.066Z",
+      "updatedAt": "2026-03-28T19:03:37.066Z"
     }
   ],
-
   "leaderboardPrizes": [
     {
       "id": "p1",
@@ -54,7 +75,6 @@
       "imageUrl": "https://example.com/images/bronze.png"
     }
   ],
-
   "raffles": [
     {
       "id": "r1",
@@ -111,9 +131,32 @@
       "totalTicketLimit": 2000,
       "createdAt": "2026-03-09T09:00:00.000Z",
       "updatedAt": "2026-03-21T18:00:00.000Z"
+    },
+    {
+      "id": "6734df6b-c145-40e9-8ef7-3f0ba72ebdff",
+      "name": "32131",
+      "description": "32131",
+      "startDate": "2026-03-03T19:03:00.000Z",
+      "endDate": "2026-03-12T19:03:00.000Z",
+      "drawDate": "2026-03-19T19:03:00.000Z",
+      "status": "active",
+      "ticketPrice": 319,
+      "maxTicketsPerUser": 11,
+      "prizes": [
+        {
+          "id": "rp1",
+          "rank": 1,
+          "name": "Jackpot Reward",
+          "type": "coins",
+          "amount": 5000,
+          "imageUrl": "https://example.com/images/jackpot.png"
+        }
+      ],
+      "totalTicketLimit": 121,
+      "createdAt": "2026-03-28T19:04:05.169Z",
+      "updatedAt": "2026-03-28T19:04:05.169Z"
     }
   ],
-
   "rafflePrizes": [
     {
       "id": "rp1",
@@ -124,7 +167,6 @@
       "imageUrl": "https://example.com/images/jackpot.png"
     }
   ],
-
   "wheels": [
     {
       "id": "w1",
@@ -132,10 +174,42 @@
       "description": "Spin daily to win coins or bonuses.",
       "status": "active",
       "segments": [
-        { "id": "s1", "label": "10 Coins", "color": "#f59e0b", "weight": 25, "prizeType": "coins", "prizeAmount": 10, "imageUrl": "" },
-        { "id": "s2", "label": "Free Spin", "color": "#3b82f6", "weight": 15, "prizeType": "freeSpin", "prizeAmount": 1, "imageUrl": "" },
-        { "id": "s3", "label": "No Win", "color": "#94a3b8", "weight": 40, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" },
-        { "id": "s4", "label": "50 Bonus", "color": "#10b981", "weight": 20, "prizeType": "bonus", "prizeAmount": 50, "imageUrl": "" }
+        {
+          "id": "s1",
+          "label": "10 Coins",
+          "color": "#f59e0b",
+          "weight": 25,
+          "prizeType": "coins",
+          "prizeAmount": 10,
+          "imageUrl": ""
+        },
+        {
+          "id": "s2",
+          "label": "Free Spin",
+          "color": "#3b82f6",
+          "weight": 15,
+          "prizeType": "freeSpin",
+          "prizeAmount": 1,
+          "imageUrl": ""
+        },
+        {
+          "id": "s3",
+          "label": "No Win",
+          "color": "#94a3b8",
+          "weight": 40,
+          "prizeType": "nothing",
+          "prizeAmount": 0,
+          "imageUrl": ""
+        },
+        {
+          "id": "s4",
+          "label": "50 Bonus",
+          "color": "#10b981",
+          "weight": 20,
+          "prizeType": "bonus",
+          "prizeAmount": 50,
+          "imageUrl": ""
+        }
       ],
       "maxSpinsPerUser": 3,
       "spinCost": 0,
@@ -144,16 +218,39 @@
       "createdAt": "2026-03-01T00:00:00.000Z",
       "updatedAt": "2026-03-01T00:00:00.000Z"
     },
-
     {
       "id": "w2",
       "name": "High Roller Wheel",
       "description": "Premium wheel with higher rewards.",
       "status": "active",
       "segments": [
-        { "id": "s1", "label": "100 Coins", "color": "#f97316", "weight": 20, "prizeType": "coins", "prizeAmount": 100, "imageUrl": "" },
-        { "id": "s2", "label": "Bonus 200", "color": "#22c55e", "weight": 10, "prizeType": "bonus", "prizeAmount": 200, "imageUrl": "" },
-        { "id": "s3", "label": "Nothing", "color": "#64748b", "weight": 70, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" }
+        {
+          "id": "s1",
+          "label": "100 Coins",
+          "color": "#f97316",
+          "weight": 20,
+          "prizeType": "coins",
+          "prizeAmount": 100,
+          "imageUrl": ""
+        },
+        {
+          "id": "s2",
+          "label": "Bonus 200",
+          "color": "#22c55e",
+          "weight": 10,
+          "prizeType": "bonus",
+          "prizeAmount": 200,
+          "imageUrl": ""
+        },
+        {
+          "id": "s3",
+          "label": "Nothing",
+          "color": "#64748b",
+          "weight": 70,
+          "prizeType": "nothing",
+          "prizeAmount": 0,
+          "imageUrl": ""
+        }
       ],
       "maxSpinsPerUser": 2,
       "spinCost": 50,
@@ -162,15 +259,30 @@
       "createdAt": "2026-03-05T00:00:00.000Z",
       "updatedAt": "2026-03-05T00:00:00.000Z"
     },
-
     {
       "id": "w3",
       "name": "Beginner Wheel",
       "description": "Easy rewards for new players.",
       "status": "active",
       "segments": [
-        { "id": "s1", "label": "5 Coins", "color": "#fde047", "weight": 50, "prizeType": "coins", "prizeAmount": 5, "imageUrl": "" },
-        { "id": "s2", "label": "Nothing", "color": "#94a3b8", "weight": 50, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" }
+        {
+          "id": "s1",
+          "label": "5 Coins",
+          "color": "#fde047",
+          "weight": 50,
+          "prizeType": "coins",
+          "prizeAmount": 5,
+          "imageUrl": ""
+        },
+        {
+          "id": "s2",
+          "label": "Nothing",
+          "color": "#94a3b8",
+          "weight": 50,
+          "prizeType": "nothing",
+          "prizeAmount": 0,
+          "imageUrl": ""
+        }
       ],
       "maxSpinsPerUser": 5,
       "spinCost": 0,
@@ -179,16 +291,39 @@
       "createdAt": "2026-03-10T00:00:00.000Z",
       "updatedAt": "2026-03-10T00:00:00.000Z"
     },
-
     {
       "id": "w4",
       "name": "Weekend Bonus Wheel",
       "description": "Special weekend-only rewards.",
       "status": "inactive",
       "segments": [
-        { "id": "s1", "label": "20 Coins", "color": "#fb7185", "weight": 40, "prizeType": "coins", "prizeAmount": 20, "imageUrl": "" },
-        { "id": "s2", "label": "Free Spin", "color": "#60a5fa", "weight": 30, "prizeType": "freeSpin", "prizeAmount": 1, "imageUrl": "" },
-        { "id": "s3", "label": "Nothing", "color": "#cbd5f5", "weight": 30, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" }
+        {
+          "id": "s1",
+          "label": "20 Coins",
+          "color": "#fb7185",
+          "weight": 40,
+          "prizeType": "coins",
+          "prizeAmount": 20,
+          "imageUrl": ""
+        },
+        {
+          "id": "s2",
+          "label": "Free Spin",
+          "color": "#60a5fa",
+          "weight": 30,
+          "prizeType": "freeSpin",
+          "prizeAmount": 1,
+          "imageUrl": ""
+        },
+        {
+          "id": "s3",
+          "label": "Nothing",
+          "color": "#cbd5f5",
+          "weight": 30,
+          "prizeType": "nothing",
+          "prizeAmount": 0,
+          "imageUrl": ""
+        }
       ],
       "maxSpinsPerUser": 3,
       "spinCost": 10,
@@ -197,15 +332,30 @@
       "createdAt": "2026-03-15T00:00:00.000Z",
       "updatedAt": "2026-03-15T00:00:00.000Z"
     },
-
     {
       "id": "w5",
       "name": "Jackpot Wheel",
       "description": "Low chance, high reward wheel.",
       "status": "active",
       "segments": [
-        { "id": "s1", "label": "500 Coins", "color": "#eab308", "weight": 5, "prizeType": "coins", "prizeAmount": 500, "imageUrl": "" },
-        { "id": "s2", "label": "Nothing", "color": "#64748b", "weight": 95, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" }
+        {
+          "id": "s1",
+          "label": "500 Coins",
+          "color": "#eab308",
+          "weight": 5,
+          "prizeType": "coins",
+          "prizeAmount": 500,
+          "imageUrl": ""
+        },
+        {
+          "id": "s2",
+          "label": "Nothing",
+          "color": "#64748b",
+          "weight": 95,
+          "prizeType": "nothing",
+          "prizeAmount": 0,
+          "imageUrl": ""
+        }
       ],
       "maxSpinsPerUser": 1,
       "spinCost": 100,
@@ -214,15 +364,30 @@
       "createdAt": "2026-03-18T00:00:00.000Z",
       "updatedAt": "2026-03-18T00:00:00.000Z"
     },
-
     {
       "id": "w6",
       "name": "Free Daily Mini Wheel",
       "description": "Quick daily spin with small rewards.",
       "status": "active",
       "segments": [
-        { "id": "s1", "label": "2 Coins", "color": "#a3e635", "weight": 60, "prizeType": "coins", "prizeAmount": 2, "imageUrl": "" },
-        { "id": "s2", "label": "Nothing", "color": "#94a3b8", "weight": 40, "prizeType": "nothing", "prizeAmount": 0, "imageUrl": "" }
+        {
+          "id": "s1",
+          "label": "2 Coins",
+          "color": "#a3e635",
+          "weight": 60,
+          "prizeType": "coins",
+          "prizeAmount": 2,
+          "imageUrl": ""
+        },
+        {
+          "id": "s2",
+          "label": "Nothing",
+          "color": "#94a3b8",
+          "weight": 40,
+          "prizeType": "nothing",
+          "prizeAmount": 0,
+          "imageUrl": ""
+        }
       ],
       "maxSpinsPerUser": 1,
       "spinCost": 0,
@@ -232,6 +397,5 @@
       "updatedAt": "2026-03-20T00:00:00.000Z"
     }
   ],
-
   "$schema": "./node_modules/json-server/schema.json"
 }
