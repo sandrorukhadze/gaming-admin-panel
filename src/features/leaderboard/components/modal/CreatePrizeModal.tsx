@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from "react";
 import {
   Alert,
   Box,
@@ -7,15 +7,18 @@ import {
   Snackbar,
   Stack,
   TextField,
-} from '@mui/material';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { AppModal } from '@/shared/ui/AppModal';
-import { ConfirmModal } from '@/shared/ui/ConfirmModal';
-import { useCreateLeaderboardPrize } from '../../hooks/useCreateLeaderboardPrize';
-import type { LeaderboardPrize } from '../../model/leaderboard.types';
-import { createPrizeSchema, type CreatePrizeFormInput, type CreatePrizeFormValues } from '../../model/leaderboard-prize.schema';
-
+} from "@mui/material";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { AppModal } from "@/shared/ui/AppModal";
+import { ConfirmModal } from "@/shared/ui/ConfirmModal";
+import { useCreateLeaderboardPrize } from "../../hooks/useCreateLeaderboardPrize";
+import type { LeaderboardPrize } from "../../model/leaderboard.types";
+import {
+  createPrizeSchema,
+  type CreatePrizeFormInput,
+  type CreatePrizeFormValues,
+} from "../../model/leaderboard-prize.schema";
 
 interface CreatePrizeModalProps {
   open: boolean;
@@ -43,10 +46,10 @@ function getNextRank(existingPrizes: LeaderboardPrize[]): number {
 
 function getDefaultValues(): CreatePrizeFormInput {
   return {
-    name: '',
-    type: 'coins',
-    amount: '',
-    imageUrl: '',
+    name: "",
+    type: "coins",
+    amount: "",
+    imageUrl: "",
   };
 }
 
@@ -58,8 +61,8 @@ export function CreatePrizeModal({
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [toast, setToast] = useState({
     open: false,
-    message: '',
-    severity: 'success' as 'success' | 'error',
+    message: "",
+    severity: "success" as "success" | "error",
   });
 
   const nextRank = useMemo(() => getNextRank(existingPrizes), [existingPrizes]);
@@ -117,8 +120,8 @@ export function CreatePrizeModal({
 
       setToast({
         open: true,
-        message: 'Prize created successfully',
-        severity: 'success',
+        message: "Prize created successfully",
+        severity: "success",
       });
 
       reset(getDefaultValues());
@@ -126,8 +129,8 @@ export function CreatePrizeModal({
     } catch {
       setToast({
         open: true,
-        message: 'Failed to create prize',
-        severity: 'error',
+        message: "Failed to create prize",
+        severity: "error",
       });
     }
   }
@@ -151,7 +154,7 @@ export function CreatePrizeModal({
 
             <TextField
               label="Name"
-              {...register('name')}
+              {...register("name")}
               error={!!errors.name}
               helperText={errors.name?.message}
             />
@@ -160,7 +163,7 @@ export function CreatePrizeModal({
               select
               label="Type"
               defaultValue="coins"
-              {...register('type')}
+              {...register("type")}
               error={!!errors.type}
               helperText={errors.type?.message}
             >
@@ -172,14 +175,14 @@ export function CreatePrizeModal({
             <TextField
               label="Amount"
               type="number"
-              {...register('amount')}
+              {...register("amount")}
               error={!!errors.amount}
               helperText={errors.amount?.message}
             />
 
             <TextField
               label="Image URL"
-              {...register('imageUrl')}
+              {...register("imageUrl")}
               error={!!errors.imageUrl}
               helperText={errors.imageUrl?.message}
             />
@@ -215,7 +218,7 @@ export function CreatePrizeModal({
         open={toast.open}
         autoHideDuration={3000}
         onClose={() => setToast((prev) => ({ ...prev, open: false }))}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert
           severity={toast.severity}

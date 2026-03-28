@@ -8,7 +8,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AppModal } from "@/shared/ui/AppModal";
 import { ConfirmModal } from "@/shared/ui/ConfirmModal";
@@ -57,6 +57,7 @@ export function EditRaffleModal({
   const { mutateAsync, isPending } = useUpdateRaffle();
   const { data: prizes = [] } = useRafflePrizes();
   const {
+    control,
     register,
     handleSubmit,
     reset,
@@ -82,7 +83,7 @@ export function EditRaffleModal({
       ticketPrice: raffle.ticketPrice,
       maxTicketsPerUser: raffle.maxTicketsPerUser,
       totalTicketLimit: raffle.totalTicketLimit,
-      prizeId: raffle.prizes[0]?.id ?? "",
+      prizeId: raffle.prizes?.[0]?.id ?? "",
     });
   }, [raffle, reset]);
 
@@ -215,22 +216,28 @@ export function EditRaffleModal({
               <MenuItem value="cancelled">Cancelled</MenuItem>
             </TextField>
 
-            <TextField
-              select
-              label="Select Prize"
-              defaultValue=""
-              {...register("prizeId")}
-              error={!!errors.prizeId}
-              helperText={errors.prizeId?.message}
-            >
-              <MenuItem value="">Select prize</MenuItem>
+            <Controller
+              name="prizeId"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  select
+                  label="Select Prize"
+                  {...field}
+                  value={field.value ?? ""}
+                  error={!!errors.prizeId}
+                  helperText={errors.prizeId?.message}
+                >
+                  <MenuItem value="">Select prize</MenuItem>
 
-              {prizes.map((prize) => (
-                <MenuItem key={prize.id} value={prize.id}>
-                  {prize.name} (Rank {prize.rank})
-                </MenuItem>
-              ))}
-            </TextField>
+                  {prizes.map((prize) => (
+                    <MenuItem key={prize.id} value={prize.id}>
+                      {prize.name} (Rank {prize.rank})
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+            />
 
             <TextField
               label="Ticket Price"

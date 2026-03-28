@@ -6,9 +6,9 @@ import {
   Divider,
   Stack,
   Typography,
-} from '@mui/material';
-import { AppModal } from '@/shared/ui/AppModal';
-import { useLeaderboardById } from '../../hooks/useLeaderboardById';
+} from "@mui/material";
+import { AppModal } from "@/shared/ui/AppModal";
+import { useLeaderboardById } from "../../hooks/useLeaderboardById";
 
 interface ViewLeaderboardModalProps {
   open: boolean;
@@ -16,28 +16,28 @@ interface ViewLeaderboardModalProps {
   leaderboardId: number | null;
 }
 
-function getStatusColor(status: 'draft' | 'active' | 'completed') {
-  if (status === 'active') {
-    return 'success';
+function getStatusColor(status: "draft" | "active" | "completed") {
+  if (status === "active") {
+    return "success";
   }
 
-  if (status === 'draft') {
-    return 'warning';
+  if (status === "draft") {
+    return "warning";
   }
 
-  return 'default';
+  return "default";
 }
 
-function getScoringColor(scoringType: 'points' | 'wins' | 'wagered') {
-  if (scoringType === 'points') {
-    return 'primary';
+function getScoringColor(scoringType: "points" | "wins" | "wagered") {
+  if (scoringType === "points") {
+    return "primary";
   }
 
-  if (scoringType === 'wins') {
-    return 'secondary';
+  if (scoringType === "wins") {
+    return "secondary";
   }
 
-  return 'info';
+  return "info";
 }
 
 export function ViewLeaderboardModal({
@@ -85,9 +85,7 @@ export function ViewLeaderboardModal({
             <Typography variant="caption" color="text.secondary">
               Description
             </Typography>
-            <Typography variant="body1">
-              {data.description}
-            </Typography>
+            <Typography variant="body1">{data.description}</Typography>
           </Box>
 
           <Stack direction="row" spacing={2}>
@@ -100,7 +98,7 @@ export function ViewLeaderboardModal({
                   label={data.status}
                   color={getStatusColor(data.status)}
                   size="small"
-                  sx={{ textTransform: 'capitalize' }}
+                  sx={{ textTransform: "capitalize" }}
                 />
               </Box>
             </Box>
@@ -115,7 +113,7 @@ export function ViewLeaderboardModal({
                   color={getScoringColor(data.scoringType)}
                   size="small"
                   variant="outlined"
-                  sx={{ textTransform: 'capitalize' }}
+                  sx={{ textTransform: "capitalize" }}
                 />
               </Box>
             </Box>

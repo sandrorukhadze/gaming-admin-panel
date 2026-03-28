@@ -17,58 +17,23 @@
       "id": 2,
       "title": "Daily Points Challenge",
       "description": "Earn points by playing games daily and climb the leaderboard.",
-      "startDate": "2026-03-20T00:00:00.000Z",
-      "endDate": "2026-03-21T23:59:59.000Z",
+      "startDate": "2026-03-19T08:00:00.000Z",
+      "endDate": "2026-03-21T07:59:00.000Z",
       "status": "active",
       "scoringType": "points",
-      "prizes": [],
+      "prizes": [
+        {
+          "id": "p2",
+          "rank": 2,
+          "name": "Second Place Reward",
+          "type": "coins",
+          "amount": 500,
+          "imageUrl": "https://example.com/images/silver.png"
+        }
+      ],
       "maxParticipants": 50,
       "createdAt": "2026-03-19T12:00:00.000Z",
-      "updatedAt": "2026-03-20T00:00:00.000Z"
-    },
-    {
-      "id": 3,
-      "title": "d321",
-      "description": "321",
-      "startDate": "2026-03-05T19:42:00.000Z",
-      "endDate": "2026-03-21T19:42:00.000Z",
-      "status": "active",
-      "scoringType": "wins",
-      "prizes": [
-        {
-          "id": "p1",
-          "rank": 1,
-          "name": "Grand Prize",
-          "type": "coins",
-          "amount": 1000,
-          "imageUrl": "https://example.com/images/gold.png"
-        }
-      ],
-      "maxParticipants": 3,
-      "createdAt": "2026-03-28T19:42:51.136Z",
-      "updatedAt": "2026-03-28T19:42:51.136Z"
-    },
-    {
-      "id": 4,
-      "title": "23bbbbb",
-      "description": "23",
-      "startDate": "2026-03-05T19:51:00.000Z",
-      "endDate": "2026-03-27T19:51:00.000Z",
-      "status": "active",
-      "scoringType": "points",
-      "prizes": [
-        {
-          "id": "p1",
-          "rank": 1,
-          "name": "Grand Prize",
-          "type": "coins",
-          "amount": 1000,
-          "imageUrl": "https://example.com/images/gold.png"
-        }
-      ],
-      "maxParticipants": 12,
-      "createdAt": "2026-03-28T19:51:56.525Z",
-      "updatedAt": "2026-03-28T19:51:56.525Z"
+      "updatedAt": "2026-03-28T20:15:22.363Z"
     }
   ],
   "leaderboardPrizes": [
@@ -102,15 +67,25 @@
       "id": "r1",
       "name": "March Mega Raffle",
       "description": "Buy tickets for a chance to win big rewards this March.",
-      "startDate": "2026-03-01T00:00:00.000Z",
-      "endDate": "2026-03-31T23:59:59.000Z",
-      "drawDate": "2026-04-01T12:00:00.000Z",
+      "startDate": "2026-02-28T20:00:00.000Z",
+      "endDate": "2026-03-31T19:59:00.000Z",
+      "drawDate": "2026-04-01T08:00:00.000Z",
       "status": "active",
       "ticketPrice": 100,
       "maxTicketsPerUser": 10,
       "totalTicketLimit": 1000,
       "createdAt": "2026-03-01T09:00:00.000Z",
-      "updatedAt": "2026-03-01T09:00:00.000Z"
+      "updatedAt": "2026-03-28T20:10:02.399Z",
+      "prizes": [
+        {
+          "id": "rp1",
+          "rank": 1,
+          "name": "Jackpot Reward",
+          "type": "coins",
+          "amount": 5000,
+          "imageUrl": "https://example.com/images/jackpot.png"
+        }
+      ]
     },
     {
       "id": "r2",
@@ -130,29 +105,49 @@
       "id": "r3",
       "name": "New Users Raffle",
       "description": "Exclusive raffle for newly registered users.",
-      "startDate": "2026-03-15T00:00:00.000Z",
-      "endDate": "2026-03-30T23:59:59.000Z",
-      "drawDate": "2026-03-31T15:00:00.000Z",
+      "startDate": "2026-03-14T20:00:00.000Z",
+      "endDate": "2026-03-30T19:59:00.000Z",
+      "drawDate": "2026-03-31T11:00:00.000Z",
       "status": "active",
       "ticketPrice": 10,
       "maxTicketsPerUser": 3,
       "totalTicketLimit": 300,
       "createdAt": "2026-03-14T08:00:00.000Z",
-      "updatedAt": "2026-03-14T08:00:00.000Z"
+      "updatedAt": "2026-03-28T20:13:07.536Z",
+      "prizes": [
+        {
+          "id": "rp1",
+          "rank": 1,
+          "name": "Jackpot Reward",
+          "type": "coins",
+          "amount": 5000,
+          "imageUrl": "https://example.com/images/jackpot.png"
+        }
+      ]
     },
     {
       "id": "r4",
       "name": "VIP Exclusive Raffle",
       "description": "High-value raffle available only for VIP players.",
-      "startDate": "2026-03-10T00:00:00.000Z",
-      "endDate": "2026-03-20T23:59:59.000Z",
-      "drawDate": "2026-03-21T18:00:00.000Z",
-      "status": "completed",
+      "startDate": "2026-03-09T20:00:00.000Z",
+      "endDate": "2026-03-20T19:59:00.000Z",
+      "drawDate": "2026-03-21T14:00:00.000Z",
+      "status": "active",
       "ticketPrice": 200,
       "maxTicketsPerUser": 20,
       "totalTicketLimit": 2000,
       "createdAt": "2026-03-09T09:00:00.000Z",
-      "updatedAt": "2026-03-21T18:00:00.000Z"
+      "updatedAt": "2026-03-28T20:13:15.867Z",
+      "prizes": [
+        {
+          "id": "rp1",
+          "rank": 1,
+          "name": "Jackpot Reward",
+          "type": "coins",
+          "amount": 5000,
+          "imageUrl": "https://example.com/images/jackpot.png"
+        }
+      ]
     },
     {
       "id": "9d32deee-f431-49cb-9c72-0980279e092f",
