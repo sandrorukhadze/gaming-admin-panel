@@ -1,6 +1,6 @@
-import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined';
-import CasinoOutlinedIcon from '@mui/icons-material/CasinoOutlined';
-import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
+import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
+import CasinoOutlinedIcon from "@mui/icons-material/CasinoOutlined";
+import EmojiEventsOutlinedIcon from "@mui/icons-material/EmojiEventsOutlined";
 import {
   Box,
   Divider,
@@ -11,9 +11,9 @@ import {
   ListItemText,
   Toolbar,
   Typography,
-} from '@mui/material';
-import { NavLink, useLocation } from 'react-router-dom';
-import { ROUTES } from '@/shared/constants/routes';
+} from "@mui/material";
+import { NavLink, useLocation } from "react-router-dom";
+import { ROUTES } from "@/shared/constants/routes";
 
 interface AppSidebarProps {
   width: number;
@@ -22,22 +22,22 @@ interface AppSidebarProps {
 interface NavItem {
   label: string;
   path: string;
-  icon: JSX.Element;
+  icon: React.ReactNode;
 }
 
 const navItems: NavItem[] = [
   {
-    label: 'Leaderboards',
+    label: "Leaderboards",
     path: ROUTES.leaderboards,
     icon: <EmojiEventsOutlinedIcon />,
   },
   {
-    label: 'Raffles',
+    label: "Raffles",
     path: ROUTES.raffles,
     icon: <CasinoOutlinedIcon />,
   },
   {
-    label: 'Wheel',
+    label: "Wheel",
     path: ROUTES.wheel,
     icon: <AutorenewOutlinedIcon />,
   },
@@ -54,9 +54,9 @@ export function AppSidebar({ width }: AppSidebarProps) {
         flexShrink: 0,
         [`& .MuiDrawer-paper`]: {
           width,
-          boxSizing: 'border-box',
-          borderRight: '1px solid #e5e7eb',
-          bgcolor: 'background.paper',
+          boxSizing: "border-box",
+          borderRight: "1px solid #e5e7eb",
+          bgcolor: "background.paper",
         },
       }}
     >
