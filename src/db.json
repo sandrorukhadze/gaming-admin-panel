@@ -2,91 +2,121 @@
   "leaderboards": [
     {
       "id": 1,
-      "title": "44232",
-      "description": "4324",
-      "startDate": "2026-03-11T03:40:00.000Z",
-      "endDate": "2026-03-14T03:40:00.000Z",
+      "title": "High Roller Weekly Tournament",
+      "description": "Compete with top players and climb the leaderboard based on total wagered amount. The top ranked players win premium rewards and exclusive bonus payouts.",
+      "startDate": "2026-04-01T00:00:00.000Z",
+      "endDate": "2026-04-07T23:59:59.000Z",
       "status": "active",
       "scoringType": "wagered",
       "prizes": [
         {
           "id": "p1",
           "rank": 1,
-          "name": "Grand Prize",
+          "name": "Golden Jackpot",
           "type": "coins",
-          "amount": 1000,
-          "imageUrl": "https://example.com/images/gold.png"
+          "amount": 5000,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/2331/2331970.png"
         }
       ],
-      "maxParticipants": 2,
-      "createdAt": "2026-03-30T07:40:55.351Z",
-      "updatedAt": "2026-03-30T07:40:58.505Z"
+      "maxParticipants": 1000,
+      "createdAt": "2026-03-30T08:00:00.000Z",
+      "updatedAt": "2026-03-30T08:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "title": "Weekend Slot Masters",
+      "description": "A fast-paced weekend leaderboard event for slot fans. Earn points with every qualifying spin and secure your place among the top winners.",
+      "startDate": "2026-04-10T18:00:00.000Z",
+      "endDate": "2026-04-12T23:59:59.000Z",
+      "status": "draft",
+      "scoringType": "points",
+      "prizes": [
+        {
+          "id": "p2",
+          "rank": 2,
+          "name": "Silver Stack",
+          "type": "coins",
+          "amount": 2000,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
+        }
+      ],
+      "maxParticipants": 500,
+      "createdAt": "2026-03-30T08:10:00.000Z",
+      "updatedAt": "2026-03-30T08:10:00.000Z"
     }
   ],
   "leaderboardPrizes": [
     {
       "id": "p1",
       "rank": 1,
-      "name": "Grand Prize",
+      "name": "Golden Jackpot",
       "type": "coins",
-      "amount": 1000,
-      "imageUrl": "https://example.com/images/gold.png"
+      "amount": 5000,
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/2331/2331970.png"
+    },
+    {
+      "id": "p2",
+      "rank": 2,
+      "name": "Silver Stack",
+      "type": "coins",
+      "amount": 2000,
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
     },
     {
       "id": "p3",
       "rank": 3,
-      "name": "Third Place Reward",
+      "name": "Bronze Bonus",
       "type": "coins",
-      "amount": 250,
-      "imageUrl": "https://example.com/images/bronze.png"
+      "amount": 1000,
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/2583/2583344.png"
     }
   ],
   "raffles": [
     {
       "id": "r1",
-      "name": "March Mega Raffle",
-      "description": "Buy tickets for a chance to win big rewards this Mxarch.",
-      "startDate": "2026-02-28T16:00:00.000Z",
-      "endDate": "2026-03-31T15:59:00.000Z",
-      "drawDate": "2026-04-01T04:00:00.000Z",
+      "name": "Mega Jackpot Raffle",
+      "description": "Buy raffle tickets for a chance to win a massive jackpot prize. Every ticket gives players another opportunity to hit a huge reward.",
+      "startDate": "2026-04-01T00:00:00.000Z",
+      "endDate": "2026-04-30T23:59:59.000Z",
+      "drawDate": "2026-05-01T12:00:00.000Z",
       "status": "active",
       "ticketPrice": 100,
-      "maxTicketsPerUser": 10,
-      "totalTicketLimit": 1000,
-      "createdAt": "2026-03-01T09:00:00.000Z",
-      "updatedAt": "2026-03-30T07:40:33.285Z",
+      "maxTicketsPerUser": 20,
+      "totalTicketLimit": 5000,
+      "createdAt": "2026-03-30T08:00:00.000Z",
+      "updatedAt": "2026-03-30T08:00:00.000Z",
       "prizes": [
         {
           "id": "rp1",
           "rank": 1,
-          "name": "Jackpot Reward",
+          "name": "Mega Jackpot",
           "type": "coins",
-          "amount": 5000,
-          "imageUrl": "https://example.com/images/jackpot.png"
+          "amount": 10000,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/3135/3135706.png"
         }
       ]
     },
     {
       "id": "r2",
-      "name": "Weekend Lucky Draw",
-      "description": "Special weekend raffle with increased rewards.s",
-      "startDate": "2026-03-25T20:00:00.000Z",
-      "endDate": "2026-03-28T19:59:00.000Z",
-      "drawDate": "2026-03-29T08:00:00.000Z",
-      "status": "active",
+      "name": "Lucky Night Draw",
+      "description": "A special evening raffle with limited entries and boosted rewards. Ideal for players who want a quick shot at premium prizes.",
+      "startDate": "2026-04-15T10:00:00.000Z",
+      "endDate": "2026-04-18T15:00:00.000Z",
+      "drawDate": "2026-04-19T02:00:00.000Z",
+      "status": "draft",
       "ticketPrice": 50,
-      "maxTicketsPerUser": 5,
-      "totalTicketLimit": 500,
-      "createdAt": "2026-03-25T10:00:00.000Z",
-      "updatedAt": "2026-03-30T06:34:14.758Z",
+      "maxTicketsPerUser": 10,
+      "totalTicketLimit": 1500,
+      "createdAt": "2026-03-30T08:15:00.000Z",
+      "updatedAt": "2026-03-30T07:57:26.460Z",
       "prizes": [
         {
-          "id": "rp1",
+          "id": "rp2",
           "rank": 1,
-          "name": "Jackpot Reward",
+          "name": "Diamond Reward Pack",
           "type": "coins",
-          "amount": 5000,
-          "imageUrl": "https://example.com/images/jackpot.png"
+          "amount": 7000,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/3523/3523063.png"
         }
       ]
     }
@@ -95,117 +125,170 @@
     {
       "id": "rp1",
       "rank": 1,
-      "name": "Jackpot Reward",
+      "name": "Mega Jackpot",
       "type": "coins",
-      "amount": 5000,
-      "imageUrl": "https://example.com/images/jackpot.png"
+      "amount": 10000,
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/3135/3135706.png"
+    },
+    {
+      "id": "rp3",
+      "rank": 2,
+      "name": "Lucky Spin Bundle",
+      "type": "coins",
+      "amount": 3000,
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/599/599995.png"
     }
   ],
   "wheels": [
     {
-      "id": "w2",
-      "name": "High Roller Wheel",
-      "description": "Premium wheel with higher rewards.",
+      "id": "w1",
+      "name": "VIP Spin Wheel",
+      "description": "High-risk, high-reward wheel designed for premium players who want bigger prizes with lower chances.",
       "status": "active",
       "segments": [
         {
           "id": "s1",
-          "label": "100 Coins",
-          "color": "#f97316",
-          "weight": 20,
+          "label": "1000 Coins",
+          "color": "#facc15",
+          "weight": 5,
           "prizeType": "coins",
-          "prizeAmount": 100,
-          "imageUrl": ""
+          "prizeAmount": 1000,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/272/272525.png"
         },
         {
           "id": "s2",
-          "label": "Bonus 200",
+          "label": "500 Bonus",
           "color": "#22c55e",
           "weight": 10,
           "prizeType": "bonus",
-          "prizeAmount": 200,
-          "imageUrl": ""
+          "prizeAmount": 500,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/2107/2107957.png"
         },
         {
           "id": "s3",
-          "label": "Nothing",
+          "label": "Free Spin",
+          "color": "#38bdf8",
+          "weight": 10,
+          "prizeType": "freeSpin",
+          "prizeAmount": 1,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/833/833472.png"
+        },
+        {
+          "id": "s4",
+          "label": "Try Again",
           "color": "#64748b",
-          "weight": 70,
+          "weight": 75,
           "prizeType": "nothing",
           "prizeAmount": 0,
-          "imageUrl": ""
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"
         }
       ],
-      "maxSpinsPerUser": 2,
-      "spinCost": 50,
-      "backgroundColor": "#ffffff",
-      "borderColor": "#000000",
-      "createdAt": "2026-03-05T00:00:00.000Z",
-      "updatedAt": "2026-03-05T00:00:00.000Z"
+      "maxSpinsPerUser": 3,
+      "spinCost": 100,
+      "backgroundColor": "#1f2937",
+      "borderColor": "#facc15",
+      "createdAt": "2026-03-30T08:00:00.000Z",
+      "updatedAt": "2026-03-30T08:00:00.000Z"
     },
     {
-      "id": "w3",
-      "name": "Beginner Wheel",
-      "description": "Easy rewards for new pl2ayers.",
+      "id": "w2",
+      "name": "Daily Reward Wheel",
+      "description": "A free daily spin wheel that gives casual players small but frequent rewards to keep engagement high.",
       "status": "active",
       "segments": [
         {
-          "id": "s1",
-          "label": "5 Coins",
-          "color": "#fde047",
-          "weight": 50,
-          "prizeType": "coins",
-          "prizeAmount": 5,
-          "imageUrl": ""
-        },
-        {
-          "id": "s2",
-          "label": "Nothing",
-          "color": "#94a3b8",
-          "weight": 50,
-          "prizeType": "nothing",
-          "prizeAmount": 0,
-          "imageUrl": ""
-        }
-      ],
-      "maxSpinsPerUser": 5,
-      "spinCost": 0,
-      "backgroundColor": "#ffffff",
-      "borderColor": "#111827",
-      "createdAt": "2026-03-10T00:00:00.000Z",
-      "updatedAt": "2026-03-30T07:41:04.575Z"
-    },
-    {
-      "id": "w6",
-      "name": "Free Daily Mini Wheel",
-      "description": "Quick daily spin with small rewards.",
-      "status": "active",
-      "segments": [
-        {
-          "id": "s1",
-          "label": "2 Coins",
+          "id": "s5",
+          "label": "20 Coins",
           "color": "#a3e635",
-          "weight": 60,
+          "weight": 35,
           "prizeType": "coins",
-          "prizeAmount": 4,
-          "imageUrl": ""
+          "prizeAmount": 20,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/272/272525.png"
         },
         {
-          "id": "s2",
+          "id": "s6",
+          "label": "50 Coins",
+          "color": "#fb923c",
+          "weight": 15,
+          "prizeType": "coins",
+          "prizeAmount": 50,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/272/272525.png"
+        },
+        {
+          "id": "s7",
+          "label": "Free Spin",
+          "color": "#60a5fa",
+          "weight": 10,
+          "prizeType": "freeSpin",
+          "prizeAmount": 1,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/833/833472.png"
+        },
+        {
+          "id": "s8",
           "label": "Nothing",
           "color": "#94a3b8",
           "weight": 40,
           "prizeType": "nothing",
           "prizeAmount": 0,
-          "imageUrl": ""
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"
         }
       ],
       "maxSpinsPerUser": 1,
       "spinCost": 0,
       "backgroundColor": "#ffffff",
       "borderColor": "#111827",
-      "createdAt": "2026-03-20T00:00:00.000Z",
-      "updatedAt": "2026-03-30T06:32:23.845Z"
+      "createdAt": "2026-03-30T08:20:00.000Z",
+      "updatedAt": "2026-03-30T08:20:00.000Z"
+    },
+    {
+      "id": "w3",
+      "name": "Casino Bonus Wheel",
+      "description": "A colorful promotional wheel that mixes coins, bonuses and free spins for short-term event campaigns.",
+      "status": "draft",
+      "segments": [
+        {
+          "id": "s9",
+          "label": "100 Coins",
+          "color": "#f97316",
+          "weight": 25,
+          "prizeType": "coins",
+          "prizeAmount": 100,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/272/272525.png"
+        },
+        {
+          "id": "s10",
+          "label": "250 Bonus",
+          "color": "#22c55e",
+          "weight": 10,
+          "prizeType": "bonus",
+          "prizeAmount": 250,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/2107/2107957.png"
+        },
+        {
+          "id": "s11",
+          "label": "2 Free Spins",
+          "color": "#8b5cf6",
+          "weight": 10,
+          "prizeType": "freeSpin",
+          "prizeAmount": 2,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/833/833472.png"
+        },
+        {
+          "id": "s12",
+          "label": "Nothing",
+          "color": "#6b7280",
+          "weight": 55,
+          "prizeType": "nothing",
+          "prizeAmount": 0,
+          "imageUrl": "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"
+        }
+      ],
+      "maxSpinsPerUser": 2,
+      "spinCost": 25,
+      "backgroundColor": "#0f172a",
+      "borderColor": "#eab308",
+      "createdAt": "2026-03-30T08:30:00.000Z",
+      "updatedAt": "2026-03-30T08:30:00.000Z"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
