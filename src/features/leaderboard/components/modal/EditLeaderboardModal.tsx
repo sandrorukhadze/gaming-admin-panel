@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Button, MenuItem, Stack, TextField } from "@mui/material";
+import { Alert, Box, Button, MenuItem, Snackbar, Stack, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AppModal } from "@/shared/ui/AppModal";
@@ -38,6 +38,12 @@ export function EditLeaderboardModal({
   leaderboard,
 }: EditLeaderboardModalProps) {
   const { mutateAsync, isPending } = useUpdateLeaderboard();
+
+  const [toast, setToast] = useState({
+    open: false,
+    message: "",
+    severity: "success" as "success" | "error",
+  });
 
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const { data: prizes = [] } = useLeaderboardPrizes();
@@ -116,6 +122,12 @@ export function EditLeaderboardModal({
     await mutateAsync({
       id: leaderboard.id,
       payload,
+    });
+
+    setToast({
+      open: true,
+      message: "leaderboard updated successfully",
+      severity: "success",
     });
 
     reset(getDefaultValues());
@@ -243,6 +255,20 @@ export function EditLeaderboardModal({
         onConfirm={handleConfirmClose}
         onCancel={handleCancelClose}
       />
+      <Snackbar
+        open={toast.open}
+        autoHideDuration={3000}
+        onClose={() => setToast((prev) => ({ ...prev, open: false }))}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          severity={toast.severity}
+          variant="filled"
+          onClose={() => setToast((prev) => ({ ...prev, open: false }))}
+        >
+          {toast.message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
